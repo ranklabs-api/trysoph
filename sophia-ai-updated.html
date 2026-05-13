@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia AI — Never Miss Another Patient Call</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #2563EB;
+    --blue-dark: #1D4ED8;
+    --navy: #0F172A;
+    --white: #FFFFFF;
+    --light-blue-bg: #EEF4FF;
+    --light-blue-mid: #DBEAFE;
+    --light-blue-deep: #C7D9FD;
+    --text-dark: #1E293B;
+    --text-muted: #64748B;
+    --green: #10B981;
+    --border: #E2E8F0;
+    --gray-light: #F8FAFC;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: #ffffff; border-bottom: 1px solid #E2E8F0;
+    padding: 0 2rem; height: 64px; display: flex; align-items: center;
+    box-shadow: 0 1px 8px rgba(37,99,235,0.08);
+  }
+  .nav-inner { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo span { color: var(--text-dark); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta { background: var(--blue); color: var(--white); padding: 0.5rem 1.25rem; border-radius: 8px; text-decoration: none; font-size: 0.875rem; font-weight: 600; transition: background 0.2s, transform 0.1s; border: none; cursor: pointer; }
+  .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text-dark); font-size: 1.5rem; cursor: pointer; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, #EEF4FF 0%, #DBEAFE 40%, #C7D9FD 100%);
+    padding: 120px 2rem 80px; min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(16,185,129,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1200px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25); color: var(--blue); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.02em; }
+  .hero-badge .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse-dot 2s infinite; }
+  .physician-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); color: #059669; padding: 5px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 0.01em; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.2)} }
+  .hero h1 { font-size: clamp(2.5rem, 4vw, 3.75rem); font-weight: 900; color: var(--text-dark); line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 1.5rem; }
+  .hero h1 span { color: var(--blue); }
+  .hero-sub { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .btn-primary { background: var(--blue); color: var(--white); padding: 0.875rem 1.75rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
+  .btn-outline { background: var(--white); color: var(--blue); padding: 0.875rem 1.75rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid var(--blue); transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-outline:hover { background: rgba(37,99,235,0.06); transform: translateY(-2px); }
+  .hero-trust { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.03em; }
+  .hero-trust span { color: var(--text-dark); font-weight: 600; }
+
+  /* HERO TRANSCRIPT WIDGET */
+  .hero-widget {
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(37,99,235,0.15);
+    border-radius: 20px; padding: 1.5rem; backdrop-filter: blur(10px);
+    box-shadow: 0 8px 40px rgba(37,99,235,0.12);
+  }
+  .widget-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .widget-status { display: flex; align-items: center; gap: 8px; }
+  .status-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse-status 1.5s infinite; }
+  @keyframes pulse-status { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.5)} 50%{box-shadow:0 0 0 6px rgba(16,185,129,0)} }
+  .status-text { font-size: 0.8rem; color: var(--green); font-weight: 600; }
+  .widget-time { font-size: 0.75rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .transcript { display: flex; flex-direction: column; gap: 1rem; }
+  .msg { display: flex; gap: 10px; align-items: flex-start; animation: fadeUp 0.5s ease forwards; opacity: 0; }
+  .msg.sophia { flex-direction: row; }
+  .msg.patient { flex-direction: row-reverse; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .msg-avatar { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+  .sophia .msg-avatar { background: linear-gradient(135deg,#7C3AED,#2563EB); color: white; }
+  .patient .msg-avatar { background: #E2E8F0; color: var(--text-muted); }
+  .msg-bubble { padding: 10px 14px; border-radius: 14px; max-width: 75%; font-size: 0.82rem; line-height: 1.5; }
+  .sophia .msg-bubble { background: rgba(37,99,235,0.1); color: var(--text-dark); border-bottom-left-radius: 4px; }
+  .patient .msg-bubble { background: #F1F5F9; color: var(--text-muted); border-bottom-right-radius: 4px; }
+  .msg-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px; }
+  .sophia .msg-label { text-align: left; }
+  .patient .msg-label { text-align: right; }
+  .widget-footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .widget-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); color: #059669; padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 600; }
+  .tag.blue { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.2); color: var(--blue); }
+  .widget-verified { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-muted); }
+
+  /* LIVE DEMO */
+  .live-demo { background: linear-gradient(180deg, #C7D9FD 0%, #DBEAFE 100%); padding: 0 2rem 80px; }
+  .live-demo-inner { max-width: 1000px; margin: 0 auto; }
+  .demo-card {
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(37,99,235,0.15);
+    border-radius: 24px; padding: 3rem; text-align: center;
+    box-shadow: 0 8px 40px rgba(37,99,235,0.1);
+  }
+  .demo-title { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
+  .demo-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2.5rem; }
+  .demo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .mic-section { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+  .mic-wrapper { position: relative; }
+  .mic-pulse-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 100px; height: 100px; border-radius: 50%; background: rgba(37,99,235,0.12); animation: mic-ring 2s infinite; }
+  .mic-pulse-ring2 { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 120px; height: 120px; border-radius: 50%; background: rgba(37,99,235,0.07); animation: mic-ring 2s 0.4s infinite; }
+  @keyframes mic-ring { 0%{transform:translate(-50%,-50%) scale(0.8);opacity:1} 100%{transform:translate(-50%,-50%) scale(1.4);opacity:0} }
+  .mic-btn { position: relative; z-index: 2; width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: none; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; animation: mic-glow 2s infinite; }
+  @keyframes mic-glow { 0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,0.4),0 8px 24px rgba(37,99,235,0.3)} 50%{box-shadow:0 0 0 12px rgba(37,99,235,0),0 8px 24px rgba(37,99,235,0.5)} }
+  .mic-btn:hover { transform: scale(1.08); }
+  .mic-btn i { font-size: 1.75rem; color: white; }
+  .mic-btn.active { background: linear-gradient(135deg,#EF4444,#DC2626); animation: none; box-shadow: 0 8px 24px rgba(239,68,68,0.4); }
+  .mic-cta { font-size: 0.9rem; color: var(--text-dark); font-weight: 600; }
+  .mic-disclaimer { font-size: 0.75rem; color: var(--text-muted); }
+  .call-controls { display: none; gap: 12px; margin-top: 1rem; }
+  .call-controls.visible { display: flex; }
+  .ctrl-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--white); color: var(--text-muted); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+  .ctrl-btn.end { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); color: #EF4444; }
+  .live-transcript-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; min-height: 200px; display: flex; flex-direction: column; text-align: left; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .transcript-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .transcript-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .transcript-msgs { display: flex; flex-direction: column; gap: 10px; max-height: 200px; overflow-y: auto; }
+  .transcript-empty { color: var(--text-muted); font-size: 0.85rem; text-align: center; margin: auto; opacity: 0.6; }
+  .t-msg { font-size: 0.82rem; line-height: 1.5; padding: 8px 12px; border-radius: 10px; }
+  .t-msg.sophia { background: rgba(37,99,235,0.08); color: var(--text-dark); }
+  .t-msg.patient { background: var(--gray-light); color: var(--text-muted); }
+  .t-msg .speaker { font-size: 0.7rem; font-weight: 700; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.6; }
+
+  /* SOCIAL PROOF */
+  .social-proof { background: var(--white); padding: 3rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .social-inner { max-width: 1200px; margin: 0 auto; }
+  .social-label { text-align: center; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; margin-bottom: 1.75rem; }
+  .logo-row { display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .clinic-logo { background: var(--gray-light); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 1.4rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+
+  /* SECTIONS — Light Blue Theme */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag { display: inline-block; background: rgba(37,99,235,0.08); color: var(--blue); padding: 5px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.75rem,3vw,2.5rem); font-weight: 800; color: var(--text-dark); line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .section-sub { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 600px; }
+  .section-center { text-align: center; }
+  .section-center .section-sub { margin: 0 auto; }
+
+  /* LIGHT BLUE SECTION BACKGROUND (replaces navy) */
+  .light-blue-section {
+    background: linear-gradient(160deg, #EEF4FF 0%, #DBEAFE 60%, #C7D9FD 100%);
+  }
+  .light-blue-section .section-tag { background: rgba(37,99,235,0.12); color: var(--blue); }
+
+  /* PROBLEM */
+  .problem-section { background: var(--gray-light); }
+  .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .problem-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; }
+  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+  .problem-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1.25rem; }
+  .icon-red { background: rgba(239,68,68,0.1); color: #EF4444; }
+  .icon-amber { background: rgba(245,158,11,0.1); color: #F59E0B; }
+  .icon-blue { background: rgba(37,99,235,0.1); color: var(--blue); }
+  .problem-stat { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  .problem-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+  .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--blue),#7C3AED); opacity: 0; transition: opacity 0.3s; }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(37,99,235,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--blue); margin-bottom: 1.25rem; }
+  .feature-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.6rem; }
+  .feature-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* HOW IT WORKS — Light Blue */
+  .how-section { background: linear-gradient(160deg, #EEF4FF 0%, #DBEAFE 60%, #C7D9FD 100%); }
+  .how-section .section-title { color: var(--text-dark); }
+  .how-section .section-sub { color: var(--text-muted); }
+  .how-section .section-tag { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 32px; left: 16.5%; right: 16.5%; height: 2px; background: linear-gradient(90deg,rgba(37,99,235,0.4),rgba(124,58,237,0.4),rgba(37,99,235,0.4)); }
+  .step { text-align: center; position: relative; }
+  .step-num { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg,var(--blue),#7C3AED); color: white; font-weight: 800; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; position: relative; z-index: 1; box-shadow: 0 0 0 8px rgba(37,99,235,0.1); }
+  .step-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; }
+  .step-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* INTEGRATIONS */
+  .integrations-section { background: var(--white); }
+  .integration-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+  .integration-chip { display: flex; align-items: center; gap: 8px; padding: 0.7rem 1.25rem; border: 1px solid var(--border); border-radius: 12px; background: var(--white); font-size: 0.875rem; font-weight: 600; color: var(--text-dark); transition: all 0.2s; cursor: default; }
+  .integration-chip:hover { border-color: var(--blue); background: rgba(37,99,235,0.04); transform: translateY(-2px); }
+  .chip-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .chip-green { background: var(--green); }
+  .chip-blue { background: var(--blue); }
+  .chip-purple { background: #7C3AED; }
+  .chip-indigo { background: #4F46E5; }
+
+  /* COMPARISON */
+  .comparison-section { background: var(--gray-light); }
+  .comparison-table-wrap { margin-top: 3rem; overflow-x: auto; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: var(--white); }
+  thead tr { border-bottom: 2px solid var(--border); }
+  thead th { padding: 1rem 1.25rem; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; }
+  thead th:first-child { text-align: left; }
+  thead th.sophia-col { color: var(--blue); background: rgba(37,99,235,0.04); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--gray-light); }
+  td { padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--text-dark); text-align: center; }
+  td:first-child { text-align: left; font-weight: 600; }
+  td.sophia-col { background: rgba(37,99,235,0.04); font-weight: 700; }
+  .check { color: var(--green); font-size: 1.1rem; }
+  .cross { color: #94A3B8; font-size: 1rem; }
+  .varies { color: var(--text-muted); font-size: 0.82rem; font-style: italic; }
+  .cost { font-weight: 700; color: var(--text-dark); }
+
+  /* =====================================
+     METRICS / REVENUE SECTION
+  ===================================== */
+  .metrics-section { background: var(--white); }
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .metric-card { background: var(--gray-light); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; overflow: hidden; position: relative; }
+  .metric-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .metric-big { font-size: 2.25rem; font-weight: 900; color: var(--text-dark); letter-spacing: -0.04em; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.25rem; }
+  .metric-badge { font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+  .metric-sub-row { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+  .metric-sub-item { display: flex; flex-direction: column; }
+  .metric-sub-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .metric-sub-value { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); }
+  .metric-sub-value.green { color: var(--green); }
+
+  /* Mini sparkline chart */
+  .mini-chart { width: 100%; height: 80px; position: relative; margin-bottom: 1.25rem; }
+  .mini-chart svg { width: 100%; height: 100%; }
+  .chart-label { position: absolute; top: 8px; right: 12px; background: var(--blue); color: white; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 8px; }
+
+  /* Lead queue card */
+  .lead-queue-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .lead-queue-count { font-size: 0.75rem; font-weight: 700; background: var(--blue); color: white; padding: 2px 10px; border-radius: 100px; }
+  .lead-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .lead-row:last-child { border-bottom: none; }
+  .lead-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #E2E8F0, #CBD5E1); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+  .lead-info { flex: 1; }
+  .lead-name { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); }
+  .lead-detail { font-size: 0.75rem; color: var(--text-muted); }
+  .lead-action { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+  .lead-action.calling { background: var(--blue); color: white; animation: pulse-status 1.5s infinite; }
+  .lead-action.pending { background: var(--gray-light); border: 1px solid var(--border); color: var(--text-muted); }
+  .live-call-badge { background: var(--blue); color: white; border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .live-call-info { font-size: 0.8rem; color: rgba(255,255,255,0.8); }
+  .live-call-name { font-size: 0.95rem; font-weight: 700; color: white; }
+  .live-call-timer { font-size: 1.1rem; font-weight: 800; color: white; font-variant-numeric: tabular-nums; }
+  .calls-today-pill { background: rgba(255,255,255,0.15); border-radius: 10px; padding: 8px 14px; text-align: center; margin-top: 0.75rem; }
+  .calls-today-num { font-size: 1.5rem; font-weight: 900; color: white; display: block; }
+  .calls-today-label { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+
+  /* =====================================
+     WHAT YOU GET — Simplified like screenshot 4
+  ===================================== */
+  .wyg-section { background: var(--gray-light); }
+  .wyg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .wyg-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: all 0.3s; }
+  .wyg-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+
+  /* Card top panel — colored like screenshot 4 */
+  .wyg-panel { padding: 1.5rem; min-height: 200px; position: relative; display: flex; flex-direction: column; }
+  .wyg-panel-inbound { background: linear-gradient(135deg, #EEF4FF, #DBEAFE); }
+  .wyg-panel-outbound { background: linear-gradient(135deg, #F0FDF4, #DCFCE7); }
+  .wyg-panel-emr { background: linear-gradient(135deg, #FFF7ED, #FED7AA); }
+
+  .wyg-panel-tag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 700; margin-bottom: 1rem; width: fit-content; }
+  .wyg-panel-tag.blue { background: rgba(37,99,235,0.15); color: var(--blue); }
+  .wyg-panel-tag.green { background: rgba(16,185,129,0.15); color: #059669; }
+  .wyg-panel-tag.orange { background: rgba(249,115,22,0.15); color: #EA580C; }
+
+  .wyg-panel-title { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; }
+
+  /* Inbound panel: transcript style */
+  .wyg-chat-bubble { border-radius: 10px; padding: 9px 12px; font-size: 0.78rem; line-height: 1.45; margin-bottom: 6px; }
+  .wyg-chat-ai { background: rgba(37,99,235,0.12); color: var(--text-dark); border-bottom-left-radius: 2px; }
+  .wyg-chat-patient { background: rgba(255,255,255,0.8); color: var(--text-muted); border-bottom-right-radius: 2px; text-align: right; }
+  .wyg-booked-pill { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.25); color: #059669; border-radius: 8px; padding: 7px 10px; font-size: 0.72rem; font-weight: 600; margin-top: auto; }
+
+  /* Outbound panel: queue style */
+  .wyg-queue-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 0.78rem; }
+  .wyg-queue-row:last-child { border-bottom: none; }
+  .wyg-queue-label { color: var(--text-muted); }
+  .wyg-status-pill { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+  .wyg-status-calling { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .wyg-status-booked { background: rgba(16,185,129,0.12); color: #059669; }
+  .wyg-status-followup { background: rgba(245,158,11,0.12); color: #D97706; }
+  .wyg-rate { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+  /* EMR panel: calendar mini */
+  .wyg-calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+  .wyg-calendar-month { font-size: 0.82rem; font-weight: 700; color: var(--text-dark); }
+  .wyg-synced { font-size: 0.68rem; font-weight: 700; color: #EA580C; background: rgba(249,115,22,0.12); padding: 2px 8px; border-radius: 100px; }
+  .wyg-cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; font-size: 0.65rem; text-align: center; color: var(--text-muted); }
+  .wyg-cal-day { padding: 4px 2px; border-radius: 4px; }
+  .wyg-cal-day.active { background: var(--blue); color: white; font-weight: 700; border-radius: 50%; }
+  .wyg-booking-pill { background: rgba(249,115,22,0.1); border-radius: 8px; padding: 8px 10px; margin-top: 0.75rem; font-size: 0.75rem; }
+  .wyg-booking-title { font-weight: 700; color: #EA580C; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+  .wyg-booking-detail { color: var(--text-muted); font-size: 0.72rem; }
+
+  .wyg-card-body { padding: 1.25rem 1.5rem; }
+  .wyg-card-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.4rem; }
+  .wyg-card-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* =====================================
+     PRICING — Scrollable/interactive like screenshot 5
+  ===================================== */
+  .pricing-section { background: var(--white); }
+  .pricing-scroll-wrap { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; margin-top: 3rem; align-items: start; }
+
+  /* Left: config panel */
+  .pricing-config { background: var(--gray-light); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+  .pricing-config-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.75rem; }
+
+  /* Locations stepper */
+  .locations-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+  .stepper { display: flex; align-items: center; gap: 0; border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--white); }
+  .stepper-btn { width: 38px; height: 38px; border: none; background: transparent; font-size: 1.2rem; cursor: pointer; color: var(--text-dark); transition: background 0.15s; display: flex; align-items: center; justify-content: center; }
+  .stepper-btn:hover { background: var(--gray-light); }
+  .stepper-val { min-width: 42px; text-align: center; font-size: 1rem; font-weight: 700; color: var(--text-dark); padding: 0 4px; }
+  .locations-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+  /* Feature toggles */
+  .feature-toggles { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 0.875rem 1.25rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .toggle-row:hover { border-color: var(--blue); }
+  .toggle-row.active { border-color: var(--blue); background: rgba(37,99,235,0.04); }
+  .toggle-left { display: flex; flex-direction: column; gap: 2px; }
+  .toggle-name { font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
+  .toggle-price { font-size: 0.78rem; color: var(--text-muted); }
+  .toggle-check { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: all 0.2s; }
+  .toggle-row.active .toggle-check { background: var(--blue); border-color: var(--blue); color: white; }
+
+  /* Volume slider */
+  .volume-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .volume-label { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); }
+  .volume-value { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+  .slider-wrap { position: relative; margin-bottom: 0.5rem; }
+  .volume-slider { width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: var(--border); border-radius: 3px; outline: none; cursor: pointer; }
+  .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); cursor: pointer; box-shadow: 0 2px 8px rgba(37,99,235,0.4); border: 2px solid white; }
+  .slider-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-top: 4px; }
+  .overage-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem; }
+  .overage-note strong { color: var(--blue); }
+
+  /* Right: summary card */
+  .pricing-summary { background: var(--white); border: 1.5px solid var(--blue); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(37,99,235,0.12); position: sticky; top: 80px; }
+  .pricing-logo-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; }
+  .pricing-logo-row span { font-size: 0.875rem; font-weight: 700; color: var(--text-dark); }
+  .pricing-total { font-size: 3rem; font-weight: 900; color: var(--text-dark); letter-spacing: -0.04em; line-height: 1; }
+  .pricing-period { font-size: 0.875rem; color: var(--text-muted); margin-top: 4px; margin-bottom: 1.5rem; }
+  .pricing-divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+  .pricing-breakdown-title { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.75rem; }
+  .pricing-line { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; font-size: 0.875rem; }
+  .pricing-line span:first-child { color: var(--text-muted); }
+  .pricing-line span:last-child { font-weight: 600; color: var(--text-dark); }
+  .pricing-line.overage span:last-child { color: #F59E0B; }
+  .included-section { margin-top: 1rem; }
+  .included-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.6rem; }
+  .included-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .incl-tag { background: var(--gray-light); border: 1px solid var(--border); border-radius: 100px; padding: 3px 10px; font-size: 0.72rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+  .incl-tag.on { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.2); color: var(--blue); }
+  .incl-tag.on i { font-size: 0.6rem; }
+  .get-started-btn { width: 100%; padding: 1rem; background: var(--blue); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 1.5rem; transition: all 0.2s; }
+  .get-started-btn:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.4); }
+
+  /* TEAM */
+  .team-section { background: var(--gray-light); }
+  .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+  .team-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.3s; }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+  .team-photo { width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 1.25rem; overflow: hidden; background: var(--gray-light); border: 3px solid var(--border); }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--text-muted); background: linear-gradient(135deg,#E2E8F0,#CBD5E1); }
+  .team-name { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.25rem; }
+  .team-title { font-size: 0.85rem; color: var(--blue); font-weight: 600; margin-bottom: 0.75rem; }
+  .team-cred { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* FINAL CTA — Light Blue */
+  .cta-section { background: linear-gradient(160deg, #EEF4FF 0%, #DBEAFE 60%, #C7D9FD 100%); text-align: center; }
+  .cta-section .section-title { color: var(--text-dark); }
+  .cta-section .section-sub { color: var(--text-muted); margin: 0 auto 2.5rem; }
+  .cta-trust { font-size: 0.8rem; color: var(--text-muted); margin-top: 1.25rem; }
+
+  /* FOOTER */
+  footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08); padding: 3rem 2rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 0.6rem; }
+  .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-socials { display: flex; gap: 1rem; }
+  .social-icon { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 0.9rem; transition: all 0.2s; cursor: pointer; text-decoration: none; }
+  .social-icon:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+  .footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 1.5rem; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-hipaa { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: right; }
+  .hipaa-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #34D399; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px; }
+  .nav-logo span { color: var(--text-dark); font-weight: 700; font-size: 1.1rem; }
+
+  /* CALENDLY MODAL */
+  .calendly-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .calendly-overlay.active { display: flex; }
+  .calendly-modal { background: white; border-radius: 20px; width: 90%; max-width: 900px; height: 80vh; position: relative; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.25); }
+  .calendly-close { position: absolute; top: 1rem; right: 1rem; z-index: 10; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.1); border: none; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; color: #333; transition: background 0.2s; }
+  .calendly-close:hover { background: rgba(0,0,0,0.2); }
+  .calendly-modal iframe { width: 100%; height: 100%; border: none; }
+
+  @media (max-width: 900px) {
+    .pricing-scroll-wrap, .wyg-grid, .metrics-grid { grid-template-columns: 1fr; }
+    .pricing-summary { position: static; }
+    .hero-inner, .demo-layout { grid-template-columns: 1fr; }
+    .problem-grid, .features-grid, .steps, .team-grid { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: block; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 100px 1.25rem 60px; }
+    section { padding: 3rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CALENDLY MODAL -->
+<div class="calendly-overlay" id="calendlyOverlay" onclick="closeCalendly(event)">
+  <div class="calendly-modal">
+    <button class="calendly-close" onclick="document.getElementById('calendlyOverlay').classList.remove('active')">✕</button>
+    <iframe src="https://calendly.com/oursophia" title="Book a Demo with Sophia AI"></iframe>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span>Sophia AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#integrations">Integrations</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+    <button onclick="openCalendly()" class="nav-cta">Book a Demo</button>
+    <button class="nav-mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="dot"></span> Built for Mental Health Practices</div>
+      <div class="physician-badge"><i class="fas fa-user-md"></i> Created by Physicians</div>
+      <h1>Never miss another<br><span>patient call.</span></h1>
+      <p class="hero-sub">Sophia answers every call, schedules every appointment, verifies insurance in real time, and detects crisis language instantly — 24 hours a day, 7 days a week.</p>
+      <div class="hero-buttons">
+        <button onclick="openCalendly()" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Demo</button>
+        <a href="#demo-live" class="btn-outline"><i class="fas fa-microphone"></i> Try Sophia Now</a>
+      </div>
+      <p class="hero-trust"><span>HIPAA Compliant</span> · <span>BAA Included</span> · <span>No Setup Fee</span></p>
+    </div>
+    <div class="hero-widget">
+      <div class="widget-header">
+        <div class="widget-status">
+          <div class="status-dot"></div>
+          <span class="status-text">Sophia · Live</span>
+        </div>
+        <span class="widget-time" id="hero-timer">00:24</span>
+      </div>
+      <div class="transcript" id="hero-transcript"></div>
+      <div class="widget-footer">
+        <div class="widget-tags">
+          <span class="tag">✓ Intake Complete</span>
+          <span class="tag blue">Scheduling...</span>
+        </div>
+        <div class="widget-verified"><i class="fas fa-shield-alt" style="color:var(--green);font-size:0.75rem;"></i> HIPAA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<div class="live-demo" id="demo-live">
+  <div class="live-demo-inner">
+    <div class="demo-card">
+      <h2 class="demo-title">Talk to Sophia right now</h2>
+      <p class="demo-sub">No signup required. Just click and speak.</p>
+      <div class="demo-layout">
+        <div class="mic-section">
+          <div class="mic-wrapper">
+            <div class="mic-pulse-ring2"></div>
+            <div class="mic-pulse-ring"></div>
+            <button class="mic-btn" id="micBtn" onclick="toggleCall()">
+              <i class="fas fa-microphone" id="micIcon"></i>
+            </button>
+          </div>
+          <p class="mic-cta" id="micCta">Click to speak with Sophia</p>
+          <p class="mic-disclaimer" id="micStatus">No account needed · HIPAA compliant</p>
+          <div class="call-controls" id="callControls">
+            <button class="ctrl-btn" onclick="toggleMute()" id="muteBtn"><i class="fas fa-microphone-slash"></i> Mute</button>
+            <button class="ctrl-btn end" onclick="endCall()"><i class="fas fa-phone-slash"></i> End Call</button>
+          </div>
+        </div>
+        <div class="live-transcript-panel">
+          <div class="transcript-header">
+            <span class="transcript-label">Live Transcript</span>
+            <span class="status-dot" id="transcriptDot" style="display:none;width:6px;height:6px;animation:none;background:#94A3B8;"></span>
+          </div>
+          <div class="transcript-msgs" id="liveTranscript">
+            <p class="transcript-empty">Start a call to see the transcript...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof">
+  <div class="social-inner">
+    <p class="social-label">Trusted by mental health practices across Florida</p>
+    <div class="logo-row">
+      <div class="clinic-logo">Sunrise Behavioral Health</div>
+      <div class="clinic-logo">Serenity Counseling Group</div>
+      <div class="clinic-logo">Mindful Path Therapy</div>
+      <div class="clinic-logo">Clarity Mental Wellness</div>
+      <div class="clinic-logo">Resilience Psych Associates</div>
+      <div class="clinic-logo">Harbor View Counseling</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET — Simplified, 3 cards like screenshot 4 -->
+<section class="wyg-section" id="what-you-get">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">What You Get</span>
+      <h2 class="section-title">A complete system to answer calls and book patients automatically</h2>
+      <p class="section-sub">Three core capabilities working together 24/7.</p>
+    </div>
+    <div class="wyg-grid">
+
+      <!-- Card 1: Inbound AI Receptionist -->
+      <div class="wyg-card">
+        <div class="wyg-panel wyg-panel-inbound">
+          <span class="wyg-panel-tag blue"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Live</span>
+          <div class="wyg-panel-title">Live Transcript</div>
+          <div class="wyg-chat-bubble wyg-chat-ai">Hi! Thank you for calling. This is Sophia. How can I help you today?</div>
+          <div class="wyg-chat-bubble wyg-chat-patient">I'd like to schedule an appointment.</div>
+          <div class="wyg-booked-pill">✓ Booked — Thursday 3:00 PM confirmed. SMS sent ✓</div>
+        </div>
+        <div class="wyg-card-body">
+          <div class="wyg-card-title">AI Voice Receptionist</div>
+          <p class="wyg-card-desc">Answers every call 24/7, collects intake, verifies insurance, and books — in real time.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Outbound Lead Calling -->
+      <div class="wyg-card">
+        <div class="wyg-panel wyg-panel-outbound">
+          <span class="wyg-panel-tag green"><i class="fas fa-phone" style="font-size:0.5rem;"></i> Outbound</span>
+          <div class="wyg-panel-title">Lead Queue</div>
+          <div class="wyg-queue-row">
+            <span class="wyg-queue-label">Jane M. — New lead</span>
+            <span class="wyg-status-pill wyg-status-calling">Calling...</span>
+          </div>
+          <div class="wyg-queue-row">
+            <span class="wyg-queue-label">Tom R. — Follow-up #2</span>
+            <span class="wyg-status-pill wyg-status-followup">24/7</span>
+          </div>
+          <div class="wyg-queue-row">
+            <span class="wyg-queue-label">Sarah K. — Booked</span>
+            <span class="wyg-status-pill wyg-status-booked">Confirmed ✓</span>
+          </div>
+          <p class="wyg-rate">60% booking rate from outbound calls</p>
+        </div>
+        <div class="wyg-card-body">
+          <div class="wyg-card-title">Outbound Lead Calling</div>
+          <p class="wyg-card-desc">Sophia calls your leads automatically and follows up until they book — no manual work needed.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: EMR Booking -->
+      <div class="wyg-card">
+        <div class="wyg-panel wyg-panel-emr">
+          <div class="wyg-calendar-header">
+            <div class="wyg-calendar-month">May 2026</div>
+            <span class="wyg-synced">✓ Synced</span>
+          </div>
+          <div class="wyg-cal-grid">
+            <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+            <div></div><div></div><div class="wyg-cal-day">1</div><div class="wyg-cal-day">2</div><div class="wyg-cal-day">3</div><div class="wyg-cal-day active">4</div><div class="wyg-cal-day">5</div>
+            <div class="wyg-cal-day">6</div><div class="wyg-cal-day">7</div><div class="wyg-cal-day">8</div><div class="wyg-cal-day">9</div><div class="wyg-cal-day">10</div><div class="wyg-cal-day">11</div><div class="wyg-cal-day">12</div>
+          </div>
+          <div class="wyg-booking-pill">
+            <div class="wyg-booking-title"><span>●</span> New Booking</div>
+            <div class="wyg-booking-detail">Patient: Jane Doe · Fri, May 4 · 2:30 PM</div>
+          </div>
+        </div>
+        <div class="wyg-card-body">
+          <div class="wyg-card-title">Direct EMR Booking</div>
+          <p class="wyg-card-desc">Books directly into SimplePractice and other EMRs. Your calendar fills itself automatically.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS / REVENUE SECTION -->
+<section class="metrics-section">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Results</span>
+      <h2 class="section-title">Real outcomes for mental health practices</h2>
+      <p class="section-sub">Average metrics from practices using Sophia for 90+ days.</p>
+    </div>
+    <div class="metrics-grid">
+
+      <!-- Additional Revenue Card -->
+      <div class="metric-card">
+        <div class="metric-card-title">Additional Revenue</div>
+        <div class="metric-big">$8,400 <span class="metric-badge">+28%</span></div>
+        <div class="metric-sub-row">
+          <div class="metric-sub-item">
+            <span class="metric-sub-label">Calls Answered</span>
+            <span class="metric-sub-value">342</span>
+          </div>
+          <div class="metric-sub-item">
+            <span class="metric-sub-label">Missed Calls</span>
+            <span class="metric-sub-value green">0</span>
+          </div>
+        </div>
+        <div class="mini-chart">
+          <svg viewBox="0 0 300 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2563EB" stop-opacity="0.2"/>
+                <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 72 C30 68,60 65,90 58 C120 51,150 45,180 35 C210 25,240 18,270 10 L270 80 L0 80 Z" fill="url(#revGrad)"/>
+            <path d="M0 72 C30 68,60 65,90 58 C120 51,150 45,180 35 C210 25,240 18,270 10" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="210" cy="28" r="4" fill="#2563EB"/>
+          </svg>
+          <span class="chart-label">$2.1k this week</span>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">24/7 Call Coverage — Never miss a call. Every answered call is potential revenue.</div>
+      </div>
+
+      <!-- Lead Generation / Outbound Card -->
+      <div class="metric-card" style="background:#1E293B;">
+        <div class="metric-card-title" style="color:rgba(255,255,255,0.5);">Outbound Lead Pipeline</div>
+        <div class="lead-queue-header">
+          <span style="font-size:0.9rem;font-weight:700;color:white;">Lead Queue</span>
+          <span class="lead-queue-count">9 pending</span>
+        </div>
+        <div class="lead-row">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,#60A5FA,#3B82F6);color:white;">JM</div>
+          <div class="lead-info">
+            <div class="lead-name" style="color:white;">Jennifer M.</div>
+            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">New inquiry · Anxiety therapy</div>
+          </div>
+          <div class="lead-action calling"><i class="fas fa-phone"></i></div>
+        </div>
+        <div class="lead-row">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,#A78BFA,#7C3AED);color:white;">TR</div>
+          <div class="lead-info">
+            <div class="lead-name" style="color:white;">Thomas R.</div>
+            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">Follow-up #2 · Depression</div>
+          </div>
+          <div class="lead-action pending"><i class="fas fa-clock"></i></div>
+        </div>
+        <div class="lead-row" style="border-bottom:none;">
+          <div class="lead-avatar" style="background:linear-gradient(135deg,#6EE7B7,#10B981);color:white;">SK</div>
+          <div class="lead-info">
+            <div class="lead-name" style="color:white;">Sarah K.</div>
+            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">Booked · Couples counseling</div>
+          </div>
+          <div class="lead-action" style="background:rgba(16,185,129,0.2);color:#10B981;"><i class="fas fa-check"></i></div>
+        </div>
+        <div class="live-call-badge">
+          <div>
+            <div class="live-call-info">Calling now</div>
+            <div class="live-call-name">Jennifer M.</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="live-call-timer" id="liveCallTimer">0:18</div>
+          </div>
+        </div>
+        <div class="calls-today-pill">
+          <span class="calls-today-num">47</span>
+          <span class="calls-today-label">Calls today</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">The Problem</span>
+      <h2 class="section-title">Your patients deserve better than voicemail</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon icon-red"><i class="fas fa-phone-slash"></i></div>
+        <div class="problem-stat">35%</div>
+        <div class="problem-stat" style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">of mental health calls go unanswered</div>
+        <p class="problem-desc">Every missed call is a patient who may give up on getting help.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon icon-amber"><i class="fas fa-dollar-sign"></i></div>
+        <div class="problem-stat">$45,000+</div>
+        <div class="problem-stat" style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">/year for a full-time receptionist</div>
+        <p class="problem-desc">And they still can't answer calls at 8pm when a patient finally works up the courage to call.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon icon-blue"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="problem-stat" style="font-size:1.1rem;">Crisis calls</div>
+        <div class="problem-stat" style="font-size:1rem;font-weight:600;margin-bottom:0.5rem;">can't wait on hold</div>
+        <p class="problem-desc">Sophia detects crisis language in real time and transfers to 988 or 911 — instantly, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Features</span>
+      <h2 class="section-title">Everything your front desk needs — automated</h2>
+      <p class="section-sub">Sophia handles the entire patient journey from first call to scheduled appointment, 24/7.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-phone"></i></div>
+        <div class="feature-title">24/7 Inbound Call Coverage</div>
+        <p class="feature-desc">Every call answered. No voicemail. No hold music. No missed patients — day or night.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="feature-title">Direct EMR Scheduling</div>
+        <p class="feature-desc">Books directly into SimplePractice. Your calendar fills itself while you focus on care.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="feature-title">Real-Time Insurance Verification</div>
+        <p class="feature-desc">Sophia verifies benefits during the call so patients know their coverage before they hang up.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+        <div class="feature-title">Claims & Denial Management</div>
+        <p class="feature-desc">Submits claims via Waystar and fights denials automatically. Get paid faster.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="feature-title">Outbound Lead Calling</div>
+        <p class="feature-desc">Sophia calls your leads automatically and follows up until they book — no manual outreach needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-heart"></i></div>
+        <div class="feature-title">Crisis Detection & Transfer</div>
+        <p class="feature-desc">Detects crisis language in real time and instantly routes to 988 or 911 — every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — Light Blue -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">How It Works</span>
+      <h2 class="section-title">From first ring to booked appointment</h2>
+      <p class="section-sub">Three steps. Zero effort from your team.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Patient calls your existing number</div>
+        <p class="step-desc">No new phone number required. Sophia forwards directly from your current line — setup in under an hour.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Sophia handles intake, scheduling & insurance in real time</div>
+        <p class="step-desc">Collects name, DOB, insurance, appointment type, provider preference — and verifies benefits live.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Appointment booked, claim submitted automatically</div>
+        <p class="step-desc">SimplePractice updated instantly. Your team wakes up to a full calendar and zero missed calls.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section class="integrations-section" id="integrations">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Integrations</span>
+      <h2 class="section-title">Works with the tools you already use</h2>
+      <p class="section-sub">Sophia plugs into your existing stack — no migration required.</p>
+    </div>
+    <div class="integration-grid">
+      <div class="integration-chip"><span class="chip-dot chip-green"></span> SimplePractice</div>
+      <div class="integration-chip"><span class="chip-dot chip-blue"></span> TherapyNotes</div>
+      <div class="integration-chip"><span class="chip-dot chip-purple"></span> TheraNest</div>
+      <div class="integration-chip"><span class="chip-dot chip-indigo"></span> Jane App</div>
+      <div class="integration-chip"><span class="chip-dot" style="background:#0078C8;"></span> Valant</div>
+      <div class="integration-chip"><span class="chip-dot" style="background:#7C3AED;"></span> ICANotes</div>
+      <div class="integration-chip"><span class="chip-dot" style="background:#059669;"></span> Osmind</div>
+      <div class="integration-chip"><span class="chip-dot" style="background:#DC2626;"></span> Carelogic</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison-section">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Comparison</span>
+      <h2 class="section-title">How Sophia compares</h2>
+      <p class="section-sub">Built exclusively for mental health — not a generic tool adapted for it.</p>
+    </div>
+    <div class="comparison-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;">Feature</th>
+            <th class="sophia-col">Sophia AI</th>
+            <th>AI Receptionist Products</th>
+            <th>Traditional Receptionist</th>
+            <th>Answering Service</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Mental health specific</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+          <tr><td>24/7 availability</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="varies">Varies</span></td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Real-time insurance verification</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+          <tr><td>Crisis detection &amp; transfer</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="varies">Varies</span></td><td><span class="cross">✕</span></td></tr>
+          <tr><td>Direct EMR booking</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td></tr>
+          <tr><td>Outbound lead calling</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
+          <tr><td>HIPAA BAA included</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="varies">Varies</span></td><td><span class="check">✓</span></td><td><span class="varies">Varies</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING — Scrollable interactive like screenshot 5 -->
+<section class="pricing-section" id="pricing">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Pricing</span>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-sub">Pay for what you use. No setup fees. No surprise bills. Cancel anytime.</p>
+    </div>
+    <div class="pricing-scroll-wrap">
+
+      <!-- LEFT: Config Panel -->
+      <div class="pricing-config">
+
+        <!-- Clinic locations -->
+        <div class="pricing-config-label">Clinic Locations</div>
+        <div class="locations-row">
+          <div class="stepper">
+            <button class="stepper-btn" onclick="changeLocations(-1)">−</button>
+            <span class="stepper-val" id="locationsVal">1</span>
+            <button class="stepper-btn" onclick="changeLocations(1)">+</button>
+          </div>
+          <span style="font-size:0.85rem;color:var(--text-dark);font-weight:600;" id="locationsLabel">1 clinic location</span>
+        </div>
+        <p class="locations-note">Each additional clinic location adds $350/month.</p>
+
+        <!-- Features -->
+        <div class="pricing-config-label" style="margin-bottom:0.75rem;">Features</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Choose what Sophia handles for your practice</div>
+        <div class="feature-toggles">
+          <div class="toggle-row active" id="toggle-inbound" onclick="toggleFeature('inbound')">
+            <div class="toggle-left">
+              <span class="toggle-name"><i class="fas fa-phone" style="margin-right:6px;color:var(--blue);"></i> Inbound Calls</span>
+              <span class="toggle-price">$550/month · Included by default</span>
+            </div>
+            <div class="toggle-check"><i class="fas fa-check"></i></div>
+          </div>
+          <div class="toggle-row" id="toggle-outbound" onclick="toggleFeature('outbound')">
+            <div class="toggle-left">
+              <span class="toggle-name"><i class="fas fa-bullhorn" style="margin-right:6px;color:#7C3AED;"></i> Outbound Campaigns</span>
+              <span class="toggle-price">+$550/month · Lead calling & follow-up</span>
+            </div>
+            <div class="toggle-check"></div>
+          </div>
+        </div>
+
+        <!-- Volume slider -->
+        <div class="pricing-config-label" style="margin-bottom:0.5rem;">Monthly Call Volume</div>
+        <div class="volume-row">
+          <span class="volume-label" id="volumeLabel">Estimated minutes per month</span>
+          <span class="volume-value" id="volumeVal">1,000 min</span>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="10000" step="250" value="1000" oninput="updateSlider()">
+        </div>
+        <div class="slider-labels">
+          <span>0</span><span>2,500</span><span>5,000</span><span>7,500</span><span>10,000</span>
+        </div>
+        <p class="overage-note">First 1,000 min included. Overage: <strong>$0.20/min</strong></p>
+      </div>
+
+      <!-- RIGHT: Summary Card -->
+      <div class="pricing-summary">
+        <div class="pricing-logo-row">
+          <span style="font-size:1rem;font-weight:800;color:var(--blue);">Sophia AI</span>
+        </div>
+        <div class="pricing-total" id="pricingTotal">$550</div>
+        <div class="pricing-period">Per month · based on your selections</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-breakdown-title">Cost breakdown</div>
+        <div class="pricing-line" id="line-inbound">
+          <span>Inbound calls (1 clinic)</span>
+          <span>$550</span>
+        </div>
+        <div class="pricing-line" id="line-outbound" style="display:none;">
+          <span>Outbound campaigns</span>
+          <span>$550</span>
+        </div>
+        <div class="pricing-line" id="line-extra-locs" style="display:none;">
+          <span id="extra-locs-label">Extra locations</span>
+          <span id="extra-locs-val">$0</span>
+        </div>
+        <div class="pricing-line overage" id="line-overage" style="display:none;">
+          <span id="overage-label">Overage</span>
+          <span id="overage-val" style="color:#F59E0B;">+$0</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="included-section">
+          <div class="included-title">Included</div>
+          <div class="included-tags" id="includedTags">
+            <div class="incl-tag on"><i class="fas fa-check"></i>Inbound AI</div>
+            <div class="incl-tag on"><i class="fas fa-check"></i>24/7</div>
+            <div class="incl-tag on"><i class="fas fa-check"></i>HIPAA</div>
+            <div class="incl-tag on"><i class="fas fa-check"></i>BAA</div>
+            <div class="incl-tag on"><i class="fas fa-check"></i>SimplePractice</div>
+            <div class="incl-tag" id="tag-outbound">Outbound</div>
+            <div class="incl-tag" id="tag-claims">Claims</div>
+          </div>
+        </div>
+        <button class="get-started-btn" onclick="openCalendly()">Get Started</button>
+        <p style="font-size:0.72rem;color:var(--text-muted);text-align:center;margin-top:0.75rem;">No setup fee · Cancel anytime</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="section-inner">
+    <div class="section-center">
+      <span class="section-tag">Our Team</span>
+      <h2 class="section-title">Built by healthcare and technology experts</h2>
+      <p class="section-sub">Sophia was created by physicians who understand mental health — not just software.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-placeholder"><i class="fas fa-user-md"></i></div>
+        </div>
+        <div class="team-name">Jeremiah Earl, DO</div>
+        <div class="team-title">Physician & Co-Founder</div>
+        <p class="team-cred">DO with clinical experience in healthcare. Built Sophia to solve the front desk crisis in mental health practices.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-placeholder"><i class="fas fa-user"></i></div>
+        </div>
+        <div class="team-name">Josiah Earl</div>
+        <div class="team-title">Co-Founder & CTO</div>
+        <p class="team-cred">Software engineer specializing in healthcare AI infrastructure and voice technology.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <div class="team-placeholder"><i class="fas fa-user"></i></div>
+        </div>
+        <div class="team-name">Judah Earl</div>
+        <div class="team-title">Co-Founder & COO</div>
+        <p class="team-cred">Business operations expert focused on scaling Sophia to every mental health practice in America.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA — Light Blue -->
+<section class="cta-section" id="demo">
+  <div class="section-inner">
+    <span class="section-tag">Get Started</span>
+    <h2 class="section-title">Ready to stop missing patient calls?</h2>
+    <p class="section-sub">Join mental health practices across Florida using Sophia to answer every call, every time.</p>
+    <button onclick="openCalendly()" class="btn-primary" style="display:inline-flex;font-size:1rem;padding:1rem 2rem;">
+      <i class="fas fa-calendar-check"></i> Book a Demo
+    </button>
+    <p class="cta-trust">No setup fee · HIPAA Compliant · Cancel anytime</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="#" class="nav-logo" style="margin-bottom:0.5rem;display:flex;">
+          <span style="color:white;">Sophia AI</span>
+        </a>
+        <p class="footer-tagline">Never miss another patient call.</p>
+        <div style="margin-top:1rem;">
+          <span class="hipaa-badge"><i class="fas fa-shield-alt"></i> HIPAA Compliant</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:0.75rem;">Product</div>
+        <div class="footer-links" style="flex-direction:column;gap:0.6rem;">
+          <a href="#features">Features</a>
+          <a href="#how">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#integrations">Integrations</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:0.75rem;">Company</div>
+        <div class="footer-links" style="flex-direction:column;gap:0.6rem;">
+          <a href="#team">Team</a>
+          <a href="#" onclick="openCalendly(); return false;">Book a Demo</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:0.75rem;">Follow</div>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>© 2026 Sophia AI LLC. All rights reserved.</p>
+      <p class="footer-hipaa">HIPAA Compliant · BAA Available · <a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a> · <a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none;">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ========================
+// HERO TRANSCRIPT ANIMATION
+// ========================
+const heroMessages = [
+  { role: 'sophia', text: "Hi, thank you for calling Sunrise Behavioral Health. This is Sophia. How can I help you today?" },
+  { role: 'patient', text: "Hi, I'd like to schedule an appointment with a therapist." },
+  { role: 'sophia', text: "Of course! Can I get your name and date of birth?" },
+  { role: 'patient', text: "Maria Gonzalez, December 3rd, 1990." },
+  { role: 'sophia', text: "Welcome Maria! Are you a new patient with us?" },
+  { role: 'patient', text: "Yes, first time." },
+  { role: 'sophia', text: "Can I verify your insurance? I'll check your benefits right now." },
+  { role: 'patient', text: "I have Aetna, member ID 9823847." },
+  { role: 'sophia', text: "Verifying... You're covered — $20 copay. I'll book you with Dr. Chen this Thursday at 3pm." },
+];
+let heroIdx = 0;
+const transcriptEl = document.getElementById('hero-transcript');
+function addHeroMessage(msg, delay) {
+  setTimeout(() => {
+    const div = document.createElement('div');
+    div.className = `msg ${msg.role}`;
+    div.innerHTML = `<div class="msg-avatar">${msg.role==='sophia'?'S':'P'}</div><div><div class="msg-label">${msg.role==='sophia'?'Sophia':'Patient'}</div><div class="msg-bubble">${msg.text}</div></div>`;
+    transcriptEl.appendChild(div);
+    if (transcriptEl.children.length > 4) transcriptEl.removeChild(transcriptEl.children[0]);
+  }, delay);
+}
+function runHeroLoop() {
+  heroMessages.forEach((msg,i) => addHeroMessage(msg, i * 2200));
+  setTimeout(() => { transcriptEl.innerHTML = ''; runHeroLoop(); }, heroMessages.length * 2200 + 1000);
+}
+runHeroLoop();
+let secs = 24;
+setInterval(() => {
+  secs++;
+  const m = String(Math.floor(secs/60)).padStart(2,'0');
+  const s = String(secs%60).padStart(2,'0');
+  document.getElementById('hero-timer').textContent = `${m}:${s}`;
+}, 1000);
+
+// Live call timer
+let callSecs = 18;
+setInterval(() => {
+  callSecs++;
+  const m = Math.floor(callSecs/60);
+  const s = String(callSecs%60).padStart(2,'0');
+  const el = document.getElementById('liveCallTimer');
+  if(el) el.textContent = `${m}:${s}`;
+}, 1000);
+
+// ========================
+// PRICING LOGIC
+// ========================
+const INBOUND_BASE = 550;
+const OUTBOUND_ADD = 550;
+const EXTRA_LOC_COST = 350;
+const OVERAGE_RATE = 0.20;
+const INCLUDED_MINS = 1000;
+
+let locations = 1;
+let hasInbound = true;
+let hasOutbound = false;
+let volumeMins = 1000;
+
+function changeLocations(delta) {
+  locations = Math.max(1, Math.min(10, locations + delta));
+  document.getElementById('locationsVal').textContent = locations;
+  document.getElementById('locationsLabel').textContent = `${locations} clinic location${locations>1?'s':''}`;
+  recalcPricing();
+}
+
+function toggleFeature(feature) {
+  if (feature === 'inbound') {
+    // Inbound is always on
+    return;
+  }
+  if (feature === 'outbound') {
+    hasOutbound = !hasOutbound;
+    const el = document.getElementById('toggle-outbound');
+    el.classList.toggle('active', hasOutbound);
+    const check = el.querySelector('.toggle-check');
+    check.innerHTML = hasOutbound ? '<i class="fas fa-check"></i>' : '';
+  }
+  recalcPricing();
+}
+
+function updateSlider() {
+  volumeMins = parseInt(document.getElementById('volumeSlider').value);
+  document.getElementById('volumeVal').textContent = volumeMins.toLocaleString() + ' min';
+  recalcPricing();
+}
+
+function recalcPricing() {
+  let total = INBOUND_BASE; // inbound base for 1 clinic
+  let extraLocs = (locations - 1) * EXTRA_LOC_COST;
+  total += extraLocs;
+  if (hasOutbound) total += OUTBOUND_ADD;
+
+  const overageMins = Math.max(0, volumeMins - INCLUDED_MINS);
+  const overageCost = Math.round(overageMins * OVERAGE_RATE);
+  total += overageCost;
+
+  document.getElementById('pricingTotal').textContent = '$' + total.toLocaleString();
+
+  // Update breakdown lines
+  document.getElementById('line-inbound').querySelector('span:first-child').textContent = `Inbound calls (${locations} clinic${locations>1?'s':''})`;
+  document.getElementById('line-inbound').querySelector('span:last-child').textContent = '$' + (INBOUND_BASE + extraLocs).toLocaleString();
+
+  const outboundLine = document.getElementById('line-outbound');
+  outboundLine.style.display = hasOutbound ? 'flex' : 'none';
+
+  const extraLine = document.getElementById('line-extra-locs');
+  // Already included in the inbound line above; hide separate line
+  extraLine.style.display = 'none';
+
+  const overageLine = document.getElementById('line-overage');
+  if (overageCost > 0) {
+    overageLine.style.display = 'flex';
+    document.getElementById('overage-label').textContent = `Overage (${overageMins.toLocaleString()} min)`;
+    document.getElementById('overage-val').textContent = '+$' + overageCost.toLocaleString();
+  } else {
+    overageLine.style.display = 'none';
+  }
+
+  // Update included tags
+  const tagOutbound = document.getElementById('tag-outbound');
+  tagOutbound.className = hasOutbound ? 'incl-tag on' : 'incl-tag';
+  tagOutbound.innerHTML = hasOutbound ? '<i class="fas fa-check"></i>Outbound' : 'Outbound';
+}
+
+recalcPricing();
+
+// ========================
+// CALL / RETELL
+// ========================
+let retellClient = null;
+let isMuted = false;
+let callActive = false;
+
+async function toggleCall() {
+  if (!callActive) startCall(); else endCall();
+}
+async function startCall() {
+  const micBtn = document.getElementById('micBtn');
+  const micIcon = document.getElementById('micIcon');
+  const micCta = document.getElementById('micCta');
+  const micStatus = document.getElementById('micStatus');
+  const callControls = document.getElementById('callControls');
+  const liveTranscript = document.getElementById('liveTranscript');
+  micCta.textContent = 'Connecting to Sophia...';
+  micStatus.textContent = '';
+  try {
+    const AGENT_ID = 'AGENT_ID_HERE';
+    if (AGENT_ID === 'AGENT_ID_HERE') {
+      micCta.textContent = 'Call Sophia directly!';
+      micStatus.innerHTML = `<a href="tel:+19544195004" style="color:var(--blue);font-weight:700;font-size:1rem;">(954) 419-5004</a>`;
+      micBtn.classList.add('active');
+      micIcon.className = 'fas fa-phone';
+      callControls.classList.add('visible');
+      callActive = true;
+      liveTranscript.innerHTML = `<div class="t-msg sophia"><div class="speaker">Sophia</div>Call <strong>(954) 419-5004</strong> to speak with Sophia live — 24/7, no signup needed!</div>`;
+      return;
+    }
+    const res = await fetch('https://api.retellai.com/v2/create-web-call', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ agent_id: AGENT_ID }) });
+    if (!res.ok) throw new Error('Failed');
+    const data = await res.json();
+    retellClient = new RetellWebClient();
+    retellClient.on('call_started', () => {
+      callActive = true;
+      micBtn.classList.add('active');
+      micIcon.className = 'fas fa-phone-slash';
+      micCta.textContent = 'Speaking with Sophia...';
+      micStatus.innerHTML = '<span style="color:var(--green)">● Connected</span>';
+      callControls.classList.add('visible');
+      liveTranscript.innerHTML = '';
+    });
+    retellClient.on('call_ended', () => resetCallUI());
+    retellClient.on('update', (u) => { if (u.transcript) renderLiveTranscript(u.transcript); });
+    retellClient.on('error', () => resetCallUI());
+    await retellClient.startCall({ accessToken: data.access_token });
+  } catch(e) {
+    micCta.textContent = 'Call Sophia: (954) 419-5004';
+    micStatus.innerHTML = `<a href="tel:+19544195004" style="color:var(--blue);">Tap to call</a>`;
+    setTimeout(resetCallUI, 5000);
+  }
+}
+function endCall() { if(retellClient) retellClient.stopCall(); resetCallUI(); }
+function toggleMute() {
+  if(!retellClient) return;
+  isMuted = !isMuted;
+  retellClient.mute(isMuted);
+  const btn = document.getElementById('muteBtn');
+  btn.innerHTML = isMuted ? '<i class="fas fa-microphone"></i> Unmute' : '<i class="fas fa-microphone-slash"></i> Mute';
+}
+function resetCallUI() {
+  callActive = false; isMuted = false; retellClient = null;
+  document.getElementById('micBtn').classList.remove('active');
+  document.getElementById('micIcon').className = 'fas fa-microphone';
+  document.getElementById('micCta').textContent = 'Click to speak with Sophia';
+  document.getElementById('micStatus').textContent = 'No account needed · HIPAA compliant';
+  document.getElementById('callControls').classList.remove('visible');
+}
+function renderLiveTranscript(transcript) {
+  const c = document.getElementById('liveTranscript');
+  c.innerHTML = '';
+  transcript.slice(-6).forEach(t => {
+    const d = document.createElement('div');
+    d.className = `t-msg ${t.role==='agent'?'sophia':'patient'}`;
+    d.innerHTML = `<div class="speaker">${t.role==='agent'?'Sophia':'You'}</div>${t.content}`;
+    c.appendChild(d);
+  });
+  c.scrollTop = c.scrollHeight;
+}
+
+// Mobile menu
+function toggleMobileMenu() {
+  const links = document.querySelector('.nav-links');
+  if (links.style.display === 'flex') {
+    links.style.display = 'none';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;padding:1.5rem 2rem;gap:1.25rem;border-bottom:1px solid #E2E8F0;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,0.08);';
+  }
+}
+
+// Calendly
+function openCalendly() {
+  document.getElementById('calendlyOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCalendly(e) {
+  if (e.target === document.getElementById('calendlyOverlay')) {
+    document.getElementById('calendlyOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+</script>
+</body>
+</html>
