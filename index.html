@@ -774,33 +774,33 @@
       </div>
 
       <!-- Lead Generation / Outbound Card -->
-      <div class="metric-card" style="background:#1E293B;">
-        <div class="metric-card-title" style="color:rgba(255,255,255,0.5);">Outbound Lead Pipeline</div>
+      <div class="metric-card">
+        <div class="metric-card-title">Outbound Lead Pipeline</div>
         <div class="lead-queue-header">
-          <span style="font-size:0.9rem;font-weight:700;color:white;">Lead Queue</span>
+          <span style="font-size:0.9rem;font-weight:700;color:var(--text-dark);">Lead Queue</span>
           
         </div>
         <div class="lead-row">
           <div class="lead-avatar" style="background:linear-gradient(135deg,#60A5FA,#3B82F6);color:white;">JM</div>
           <div class="lead-info">
-            <div class="lead-name" style="color:white;">Jennifer M.</div>
-            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">New inquiry · Annual physical</div>
+            <div class="lead-name">Jennifer M.</div>
+            <div class="lead-detail">New inquiry · Annual physical</div>
           </div>
           <div class="lead-action calling"><i class="fas fa-phone"></i></div>
         </div>
         <div class="lead-row">
           <div class="lead-avatar" style="background:linear-gradient(135deg,#A78BFA,#7C3AED);color:white;">TR</div>
           <div class="lead-info">
-            <div class="lead-name" style="color:white;">Thomas R.</div>
-            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">Follow-up #2 · Depression</div>
+            <div class="lead-name">Thomas R.</div>
+            <div class="lead-detail">Follow-up #2 · Sick visit</div>
           </div>
           <div class="lead-action pending"><i class="fas fa-clock"></i></div>
         </div>
         <div class="lead-row" style="border-bottom:none;">
           <div class="lead-avatar" style="background:linear-gradient(135deg,#6EE7B7,#10B981);color:white;">SK</div>
           <div class="lead-info">
-            <div class="lead-name" style="color:white;">Sarah K.</div>
-            <div class="lead-detail" style="color:rgba(255,255,255,0.5);">Booked · Sick visit</div>
+            <div class="lead-name">Sarah K.</div>
+            <div class="lead-detail">Booked · Annual physical</div>
           </div>
           <div class="lead-action" style="background:rgba(16,185,129,0.2);color:#10B981;"><i class="fas fa-check"></i></div>
         </div>
@@ -1516,7 +1516,7 @@ async function startCall() {
   micCta.textContent = 'Connecting to Sophia...';
   micStatus.textContent = '';
   try {
-    const AGENT_ID = 'AGENT_ID_HERE';
+    const AGENT_ID = 'agent_427c147ea2968196c20b0bb2b3'; // PCP Agent ID
     if (AGENT_ID === 'AGENT_ID_HERE') {
       micCta.textContent = 'Call Sophia directly!';
       micStatus.innerHTML = `<a href="tel:+19544195004" style="color:var(--blue);font-weight:700;font-size:1rem;">(954) 419-5004</a>`;
@@ -1702,6 +1702,23 @@ function toggleFaq(btn) {
     item.classList.add('open');
   }
 }
+
+// Request microphone permission on page load for smoother call experience
+window.addEventListener('load', function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(function(stream) {
+        // Permission granted - stop the stream, we just needed permission
+        stream.getTracks().forEach(track => track.stop());
+        const micStatus = document.getElementById('micStatus');
+        if (micStatus) micStatus.textContent = 'No account needed · HIPAA compliant';
+      })
+      .catch(function(err) {
+        const micStatus = document.getElementById('micStatus');
+        if (micStatus) micStatus.textContent = 'Microphone access needed to speak with Sophia';
+      });
+  }
+});
 </script>
 </body>
 </html>
