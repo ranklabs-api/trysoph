@@ -85,7 +85,7 @@
   @keyframes pulse-status { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.5)} 50%{box-shadow:0 0 0 6px rgba(16,185,129,0)} }
   .status-text { font-size: 0.8rem; color: var(--green); font-weight: 600; }
   .widget-time { font-size: 0.75rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
-  .transcript { display: flex; flex-direction: column; gap: 1rem; }
+  .transcript { display: flex; flex-direction: column; gap: 1rem; min-height: 180px; max-height: 180px; overflow: hidden; }
   .msg { display: flex; gap: 10px; align-items: flex-start; animation: fadeUp 0.5s ease forwards; opacity: 0; }
   .msg.sophia { flex-direction: row; }
   .msg.patient { flex-direction: row-reverse; }
@@ -106,7 +106,7 @@
   .widget-verified { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-muted); }
 
   /* LIVE DEMO */
-  .live-demo { background: linear-gradient(180deg, #C7D9FD 0%, #DBEAFE 100%); padding: 0 2rem 80px; }
+  .live-demo { background: linear-gradient(180deg, #C7D9FD 0%, #DBEAFE 100%); padding: 5rem 2rem 80px; }
   .live-demo-inner { max-width: 1000px; margin: 0 auto; }
   .demo-card {
     background: rgba(255,255,255,0.85); border: 1px solid rgba(37,99,235,0.15);
@@ -437,6 +437,61 @@
   @media (max-width: 600px) {
     .hero { padding: 100px 1.25rem 60px; }
     section { padding: 3rem 1.25rem; }
+
+    /* Beyond scheduling - single column on mobile */
+    .features-grid,
+    div[style*="grid-template-columns:repeat(3,1fr)"],
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* WYG grid - single column */
+    .wyg-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+    .wyg-card { min-width: unset; width: 100%; }
+
+    /* Claims section grid */
+    div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Comparison table - make scrollable */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .comparison-table {
+      min-width: 480px;
+      font-size: 0.78rem;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 0.6rem 0.5rem;
+    }
+
+    /* Feature cards - fix text overflow */
+    .feature-card { padding: 1.25rem; }
+    .feature-title { font-size: 0.95rem; }
+    .feature-desc { font-size: 0.82rem; }
+
+    /* Integration chips - wrap properly */
+    .integration-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.5rem;
+    }
+
+    /* Metrics grid */
+    .metrics-grid { grid-template-columns: 1fr !important; }
+
+    /* Problem grid */
+    .problem-grid { grid-template-columns: 1fr !important; }
+
+    /* Hero widget */
+    .hero-widget { display: none; }
+
+    /* Section inner padding */
+    .section-inner { padding: 0 1.25rem; }
+
+    /* Pricing cards */
+    .pricing-scroll-wrap { grid-template-columns: 1fr !important; }
   }
 
   /* LinkedIn button */
@@ -493,7 +548,7 @@
   .faq-item.open .faq-answer { max-height: 600px; }
 
   /* ── TESTIMONIAL SECTION ──────────────────────────────── */
-  .testimonial-section { background: var(--light-blue-bg); padding: 5rem 0; }
+  .  testimonial-section { background: var(--light-blue-bg); padding: 5rem 0; border-top: 2px solid var(--light-blue-deep); }
   .testimonial-card-wrap {
     display: flex; justify-content: center; margin-top: 2.5rem;
   }
