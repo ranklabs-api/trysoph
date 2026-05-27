@@ -1419,6 +1419,9 @@
   </div>
 </footer>
 
+<!-- Retell Web SDK for browser-based calls -->
+<script src="https://cdn.retellai.com/retell-web-client.js"></script>
+
 <script>
 // ========================
 // HERO TRANSCRIPT ANIMATION
@@ -1551,9 +1554,8 @@ function recalcPricing() {
 
 recalcPricing();
 
-// ========================
-// CALL / RETELL
-// ========================
+// ── CALL / RETELL ────────────────────────
+const SOPHIA_BACKEND = 'https://medreceptionist-backend-production.up.railway.app';
 let retellClient = null;
 let isMuted = false;
 let callActive = false;
@@ -1582,7 +1584,11 @@ async function startCall() {
       liveTranscript.innerHTML = `<div class="t-msg sophia"><div class="speaker">Sophia</div>Call <strong>(954) 419-5004</strong> to speak with Sophia live — 24/7, no signup needed!</div>`;
       return;
     }
-    const res = await fetch('https://api.retellai.com/v2/create-web-call', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ agent_id: AGENT_ID }) });
+    const res = await fetch(`${SOPHIA_BACKEND}/create-web-call`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agent_id: AGENT_ID })
+    });
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     retellClient = new RetellWebClient();
