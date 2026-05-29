@@ -178,6 +178,11 @@
 
   /* FEATURES */
   .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .features-grid > .feature-card:nth-child(4),
+  .features-grid > .feature-card:nth-child(5) {
+    grid-column: auto;
+  }
+  .features-grid-bottom { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; max-width: 800px; margin: 1.5rem auto 0; }
   .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
   .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--blue),#7C3AED); opacity: 0; transition: opacity 0.3s; }
   .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
@@ -885,7 +890,7 @@
       <h2 class="section-title">How much are claim denials costing you?</h2>
       <p class="section-sub">The average independent primary care practice loses $40,000–$120,000 per year to preventable claim denials. Sophia fixes that in two ways.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;">
+    <div style="display:grid;grid-template-columns:1fr;gap:2rem;margin-top:3rem;max-width:680px;margin-left:auto;margin-right:auto;">
       <div style="background:white;border-radius:20px;padding:2rem;border:1px solid var(--border);box-shadow:0 4px 16px rgba(37,99,235,0.08);">
         <div style="width:48px;height:48px;border-radius:12px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:#059669;margin-bottom:1.25rem;"><i class="fas fa-shield-alt"></i></div>
         <div style="font-size:1.1rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Denial Prevention — Front End</div>
@@ -896,23 +901,6 @@
           <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;">In prevented front-end denials</div>
         </div>
       </div>
-      <div style="background:white;border-radius:20px;padding:2rem;border:1px solid var(--border);box-shadow:0 4px 16px rgba(37,99,235,0.08);">
-        <div style="width:48px;height:48px;border-radius:12px;background:rgba(37,99,235,0.1);display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:var(--blue);margin-bottom:1.25rem;"><i class="fas fa-redo-alt"></i></div>
-        <div style="font-size:1.1rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Denial Recovery — Back End</div>
-        <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.25rem;">For claims that do get denied, Sophia's Pro plan automatically detects the reason, corrects the claim, and resubmits. No staff time. No revenue sitting in AR.</p>
-        <div style="background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.15);border-radius:12px;padding:1rem;">
-          <div style="font-size:0.75rem;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.5rem;">Average recovered per practice</div>
-          <div style="font-size:2rem;font-weight:900;color:var(--text-dark);">$4,800<span style="font-size:1rem;font-weight:600;color:var(--text-muted);">/mo</span></div>
-          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;">In recovered denied claims (Pro plan add-on)</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:2rem;background:white;border-radius:16px;padding:1.5rem 2rem;border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-      <div>
-        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.25rem;">Total average ROI with Sophia Pro</div>
-        <div style="font-size:1.75rem;font-weight:900;color:var(--text-dark);">$7,200<span style="font-size:1rem;font-weight:600;color:var(--text-muted);">/mo recovered</span></div>
-      </div>
-      <button class="btn-primary" onclick="openCalendly()">Calculate your savings <i class="fas fa-arrow-right"></i></button>
     </div>
   </div>
 </section>
@@ -971,11 +959,8 @@
         <div class="feature-title">Real-Time Insurance Verification</div>
         <p class="feature-desc">Sophia verifies benefits on every call — copays, coverage, and authorizations — before the patient hangs up.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-        <div class="feature-title">Claims Submission &amp; Denial Recovery</div>
-        <p class="feature-desc">Submits clean claims automatically and recovers denied ones. No staff time. Most practices recover $2,000–$8,000/month.</p>
-      </div>
+    </div>
+    <div class="features-grid-bottom">
       <div class="feature-card">
         <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
         <div class="feature-title">Outbound Lead Calling</div>
@@ -1117,7 +1102,6 @@
           <tr><td>Primary care specific</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
           <tr><td>24/7 availability</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="varies">Varies</span></td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td></tr>
           <tr><td>Real-time insurance verification</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
-          <tr><td>Claims submission &amp; denial recovery</td><td class="sophia-col"><span class="check">✓</span> <span style="font-size:0.72rem;color:var(--blue);font-weight:600;">Pro add-on</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
           <tr><td>Direct EMR booking</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td><td><span class="cross">✕</span></td></tr>
           <tr><td>Outbound lead calling</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td><td><span class="cross">✕</span></td></tr>
           <tr><td>HIPAA BAA included</td><td class="sophia-col"><span class="check">✓</span></td><td><span class="varies">Varies</span></td><td><span class="check">✓</span></td><td><span class="varies">Varies</span></td></tr>
@@ -1560,56 +1544,8 @@ let retellClient = null;
 let isMuted = false;
 let callActive = false;
 
-async function toggleCall() {
-  if (!callActive) startCall(); else endCall();
-}
-async function startCall() {
-  const micBtn = document.getElementById('micBtn');
-  const micIcon = document.getElementById('micIcon');
-  const micCta = document.getElementById('micCta');
-  const micStatus = document.getElementById('micStatus');
-  const callControls = document.getElementById('callControls');
-  const liveTranscript = document.getElementById('liveTranscript');
-  micCta.textContent = 'Connecting to Sophia...';
-  micStatus.textContent = '';
-  try {
-    const AGENT_ID = 'agent_b745c2345027c5cd937f8680a7'; // Using MH agent until PCP agent web call is enabled
-    if (AGENT_ID === 'AGENT_ID_HERE') {
-      micCta.textContent = 'Call Sophia directly!';
-      micStatus.innerHTML = `<a href="tel:+19544195004" style="color:var(--blue);font-weight:700;font-size:1rem;">(954) 419-5004</a>`;
-      micBtn.classList.add('active');
-      micIcon.className = 'fas fa-phone';
-      callControls.classList.add('visible');
-      callActive = true;
-      liveTranscript.innerHTML = `<div class="t-msg sophia"><div class="speaker">Sophia</div>Call <strong>(954) 419-5004</strong> to speak with Sophia live — 24/7, no signup needed!</div>`;
-      return;
-    }
-    const res = await fetch(`${SOPHIA_BACKEND}/create-web-call`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ agent_id: AGENT_ID })
-    });
-    if (!res.ok) throw new Error('Failed');
-    const data = await res.json();
-    retellClient = new RetellWebClient();
-    retellClient.on('call_started', () => {
-      callActive = true;
-      micBtn.classList.add('active');
-      micIcon.className = 'fas fa-phone-slash';
-      micCta.textContent = 'Speaking with Sophia...';
-      micStatus.innerHTML = '<span style="color:var(--green)">● Connected</span>';
-      callControls.classList.add('visible');
-      liveTranscript.innerHTML = '';
-    });
-    retellClient.on('call_ended', () => resetCallUI());
-    retellClient.on('update', (u) => { if (u.transcript) renderLiveTranscript(u.transcript); });
-    retellClient.on('error', () => resetCallUI());
-    await retellClient.startCall({ accessToken: data.access_token });
-  } catch(e) {
-    micCta.textContent = 'Call Sophia: (954) 419-5004';
-    micStatus.innerHTML = `<a href="tel:+19544195004" style="color:var(--blue);">Tap to call</a>`;
-    setTimeout(resetCallUI, 5000);
-  }
+function toggleCall() {
+  window.location.href = 'tel:+19544195004';
 }
 function endCall() { if(retellClient) retellClient.stopCall(); resetCallUI(); }
 function toggleMute() {
@@ -1764,22 +1700,7 @@ function toggleFaq(btn) {
   }
 }
 
-// Request microphone permission on page load for smoother call experience
-window.addEventListener('load', function() {
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(function(stream) {
-        // Permission granted - stop the stream, we just needed permission
-        stream.getTracks().forEach(track => track.stop());
-        const micStatus = document.getElementById('micStatus');
-        if (micStatus) micStatus.textContent = 'No account needed · HIPAA compliant';
-      })
-      .catch(function(err) {
-        const micStatus = document.getElementById('micStatus');
-        if (micStatus) micStatus.textContent = 'Microphone access needed to speak with Sophia';
-      });
-  }
-});
+
 </script>
 </body>
 </html>
