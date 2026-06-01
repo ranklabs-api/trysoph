@@ -606,6 +606,34 @@
   .testimonial-author span {
     font-size: 0.82rem; color: var(--text-muted);
   }
+
+/* BACKED BY STRIP */
+.backed-strip {
+  margin-top: 64px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 10px 2rem;
+}
+.backed-strip__inner {
+  max-width: 1200px; width: 100%; margin: 0 auto;
+  display: flex; justify-content: flex-start;
+}
+.backed-by {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none; transition: opacity 0.15s ease;
+}
+.backed-by:hover { opacity: 0.75; }
+.backed-by__label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #64748B;
+}
+.backed-by__mark {
+  display: inline-flex; align-items: baseline;
+  font-size: 16px; line-height: 1; color: #1E293B;
+}
+.backed-by__bars { font-weight: 800; letter-spacing: -1px; }
+.backed-by__mark strong { font-weight: 800; }
+.backed-by__grants { font-weight: 400; color: #64748B; }
 </style>
 <script type="application/ld+json">
 {
@@ -705,6 +733,19 @@
     <button class="nav-mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
   </div>
 </nav>
+
+<!-- BACKED BY STRIP -->
+<div class="backed-strip">
+  <div class="backed-strip__inner">
+    <a href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener noreferrer" class="backed-by" aria-label="Backed by ElevenLabs Grants">
+      <span class="backed-by__label">Backed by</span>
+      <span class="backed-by__mark">
+        <!-- TODO: replace this text wordmark with the official logo from https://elevenlabs.io/brand -->
+        <span class="backed-by__bars">ll</span><strong>ElevenLabs</strong><span class="backed-by__grants">Grants</span>
+      </span>
+    </a>
+  </div>
+</div>
 
 <section class="post-hero">
   <div class="post-hero-inner">
