@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sophia AI is the AI front desk for primary care — handling patient calls, scheduling, and intake 24/7 so your staff never misses another call. HIPAA-compliant, EHR-integrated.">
 <title>Sophia AI — The AI Front Desk for Primary Care</title>
+<link rel="canonical" href="https://trysoph.com/">
+<meta property="og:title" content="Sophia AI — The AI Front Desk for Primary Care">
+<meta property="og:description" content="AI-powered front desk for primary care practices. Never miss a patient call again — 24/7 scheduling, intake, and triage.">
+<meta property="og:image" content="https://trysoph.com/og-image.png">
+<meta property="og:url" content="https://trysoph.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sophia AI — The AI Front Desk for Primary Care">
+<meta name="twitter:description" content="AI-powered front desk for primary care practices. Never miss a patient call again.">
+<meta name="twitter:image" content="https://trysoph.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -596,6 +607,27 @@
     font-size: 0.82rem; color: var(--text-muted);
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sophia AI",
+  "url": "https://trysoph.com",
+  "description": "AI-powered front desk for primary care practices — handling patient calls, scheduling, and intake 24/7.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Sophia AI",
+    "url": "https://trysoph.com"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -1428,7 +1460,7 @@ function addHeroMessage(msg, delay) {
   setTimeout(() => {
     const div = document.createElement('div');
     div.className = `msg ${msg.role}`;
-    div.innerHTML = `<div class="msg-avatar">${msg.role==='sophia'?`<img src="${SOPHIA_LOGO_SRC}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'P'}</div><div><div class="msg-label">${msg.role==='sophia'?'Sophia':'Patient'}</div><div class="msg-bubble">${msg.text}</div></div>`;
+    div.innerHTML = `<div class="msg-avatar">${msg.role==='sophia'?`<img src="${SOPHIA_LOGO_SRC}" alt="Sophia AI logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'P'}</div><div><div class="msg-label">${msg.role==='sophia'?'Sophia':'Patient'}</div><div class="msg-bubble">${msg.text}</div></div>`;
     transcriptEl.appendChild(div);
     if (transcriptEl.children.length > 4) transcriptEl.removeChild(transcriptEl.children[0]);
   }, delay);
