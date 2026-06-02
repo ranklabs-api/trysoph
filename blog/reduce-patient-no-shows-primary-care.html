@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Sophia AI is the AI front desk for primary care — handling patient calls, scheduling, and intake 24/7 so your staff never misses another call. HIPAA-compliant, EHR-integrated.">
-<title>Blog — Sophia AI | The AI Front Desk for Primary Care</title>
+<meta name="description" content="The average primary care practice loses $150,000+ per year to patient no-shows. Learn how 24/7 AI scheduling slashes no-show rates and recaptures lost revenue.">
+<title>What Patient No-Shows Are Really Costing Your Primary Care Practice — And How 24/7 Scheduling Fixes It — Sophia AI Blog</title>
   <!-- SEO by Rank Labs -->
-<link rel="canonical" href="https://trysoph.com/blog.html">
-<meta property="og:title" content="Sophia AI — The AI Front Desk for Primary Care">
-<meta property="og:description" content="AI-powered front desk for primary care practices. Never miss a patient call again — 24/7 scheduling, intake, and triage.">
+<link rel="canonical" href="https://trysoph.com/blog/reduce-patient-no-shows-primary-care.html">
+<meta property="og:title" content="What Patient No-Shows Are Really Costing Your Primary Care Practice — And How 24/7 Scheduling Fixes It">
+<meta property="og:description" content="The average primary care practice loses $150,000+ per year to patient no-shows. Learn how 24/7 AI scheduling slashes no-show rates and recaptures lost revenue.">
 <meta property="og:image" content="https://trysoph.com/og-image.png">
-<meta property="og:url" content="https://trysoph.com/">
+<meta property="og:url" content="https://trysoph.com/blog/reduce-patient-no-shows-primary-care.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sophia AI — The AI Front Desk for Primary Care">
-<meta name="twitter:description" content="AI-powered front desk for primary care practices. Never miss a patient call again.">
+<meta name="twitter:title" content="What Patient No-Shows Are Really Costing Your Primary Care Practice — And How 24/7 Scheduling Fixes It">
+<meta name="twitter:description" content="The average primary care practice loses $150,000+ per year to patient no-shows. Learn how 24/7 AI scheduling slashes no-show rates and recaptures lost revenue.">
 <meta name="twitter:image" content="https://trysoph.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -636,106 +636,138 @@
 .backed-by__mark strong { font-weight: 800; }
 .backed-by__grants { font-weight: 400; color: #64748B; }
 
-  /* BLOG LISTING STYLES */
-  .blog-hero {
+  /* BLOG POST STYLES */
+  .post-hero {
     background: linear-gradient(160deg, #EEF4FF 0%, #DBEAFE 40%, #C7D9FD 100%);
     padding: 120px 2rem 60px;
     text-align: center;
   }
-  .blog-hero h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    color: var(--text-dark);
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
-  }
-  .blog-hero p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .blog-grid-section {
-    padding: 3rem 2rem 5rem;
-    background: var(--white);
-  }
-  .blog-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2rem;
-  }
-
-  .blog-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .blog-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(37,99,235,0.1);
-    border-color: rgba(37,99,235,0.25);
-  }
-  .blog-card-category {
+  .post-hero-inner { max-width: 720px; margin: 0 auto; }
+  .post-category {
     display: inline-block;
-    background: rgba(37,99,235,0.08);
+    background: rgba(37,99,235,0.12);
     color: var(--blue);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    padding: 3px 10px;
+    padding: 4px 14px;
     border-radius: 100px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     letter-spacing: 0.03em;
   }
-  .blog-card-title {
-    font-size: 1.15rem;
+  .post-hero h1 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .post-meta {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .post-meta i { margin-right: 4px; color: var(--blue); }
+
+  .post-content {
+    padding: 3rem 2rem 4rem;
+    background: var(--white);
+  }
+  .post-content-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+  }
+  .post-content-inner h2 {
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.4;
+    color: var(--text-dark);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .post-content-inner h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+  }
+  .post-content-inner p { margin-bottom: 1.25rem; }
+  .post-content-inner ul, .post-content-inner ol {
+    margin: 0.5rem 0 1.5rem 1.5rem;
+  }
+  .post-content-inner li { margin-bottom: 0.5rem; }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .compare-card {
+    background: var(--gray-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .compare-card.highlight {
+    background: rgba(37,99,235,0.04);
+    border-color: rgba(37,99,235,0.25);
+  }
+  .compare-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin-bottom: 0.75rem;
   }
-  .blog-card-title a {
+  .compare-stat {
+    font-size: 1.75rem;
+    font-weight: 800;
     color: var(--text-dark);
-    text-decoration: none;
-    transition: color 0.2s;
+    letter-spacing: -0.02em;
   }
-  .blog-card-title a:hover { color: var(--blue); }
-  .blog-card-excerpt {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-  }
-  .blog-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-  .blog-card-date {
-    color: var(--text-muted);
+  .compare-sub {
     font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
   }
-  .blog-card-read {
-    color: var(--blue);
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-decoration: none;
+  .compare-card.highlight .compare-stat { color: var(--blue); }
+
+  .post-cta {
+    background: linear-gradient(135deg, #EEF4FF 0%, #DBEAFE 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .post-cta h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .post-cta p { color: var(--text-muted); margin-bottom: 1.25rem; }
+  .post-cta-buttons {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: gap 0.2s;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .blog-card-read:hover { gap: 10px; }
-  .blog-card-read i { font-size: 0.7rem; }
+
+  .post-related {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .post-related h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .post-related li { margin-bottom: 0.25rem; }
+  .post-related a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .post-related a:hover { text-decoration: underline; }
 
   @media (max-width: 640px) {
-    .blog-grid { grid-template-columns: 1fr; }
-    .blog-hero { padding: 100px 1.25rem 40px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .post-hero { padding: 100px 1.25rem 40px; }
+    .post-content { padding: 2rem 1.25rem; }
   }
 
 </style>
@@ -764,70 +796,135 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="../index.html" class="nav-logo">
       <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8ZGVmcz4KICAgIDwhLS0gTWFpbiBzcGhlcmUgZ3JhZGllbnQ6IGxpZ2h0IGJsdWUgY2VudGVyIHRvIGRlZXBlciBibHVlIGVkZ2UgLS0+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9InNwaGVyZUciIGN4PSI0MCUiIGN5PSIzMiUiIHI9IjcyJSIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiAgIHN0b3AtY29sb3I9IiNCQUU2RkQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIzMCUiICBzdG9wLWNvbG9yPSIjNjBBNUZBIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNjUlIiAgc3RvcC1jb2xvcj0iIzI1NjNFQiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxRTQwQUYiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8IS0tIElubmVyIGdsb3cgLyB0ZWFsIGFjY2VudCBhdCBib3R0b20tcmlnaHQgZWRnZSAtLT4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvd0ciIGN4PSI3NSUiIGN5PSI4MCUiIHI9IjU1JSIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiAgIHN0b3AtY29sb3I9IiMzOEJERjgiIHN0b3Atb3BhY2l0eT0iMC41NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzOEJERjgiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDwhLS0gU3BlY3VsYXIgaGlnaGxpZ2h0OiB3aGl0ZSBzaGluZSB0b3AtbGVmdCAtLT4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ic2hpbmVHIiBjeD0iMzMlIiBjeT0iMjUlIiByPSIzOCUiIGdyYWRpZW50VW5pdHM9Im9iamVjdEJvdW5kaW5nQm94Ij4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgICBzdG9wLWNvbG9yPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNzIpIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNjAlIiAgc3RvcC1jb2xvcj0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9InJnYmEoMjU1LDI1NSwyNTUsMCkiLz4KICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICA8IS0tIFN1YnRsZSBkcm9wIHNoYWRvdyBmaWx0ZXIgLS0+CiAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciIHg9Ii01JSIgeT0iLTUlIiB3aWR0aD0iMTEwJSIgaGVpZ2h0PSIxMTAlIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjEuNSIgc3RkRGV2aWF0aW9uPSIyLjUiIGZsb29kLWNvbG9yPSIjMUU0MEFGIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPCEtLSBTcGhlcmUgYmFzZSAtLT4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0OCIgZmlsbD0idXJsKCNzcGhlcmVHKSIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICA8IS0tIFRlYWwgZWRnZSBnbG93IC0tPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ4IiBmaWxsPSJ1cmwoI2dsb3dHKSIvPgogIDwhLS0gU3BlY3VsYXIgc2hpbmUgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9InVybCgjc2hpbmVHKSIvPgogIDwhLS0gRWxlZ2FudCB0aGluIFMg4oCUIHNlcmlmLCBzYW1lIHNwaXJpdCBhcyBvcmlnaW5hbCAtLT4KICA8dGV4dAogICAgeD0iNTAiIHk9IjY2IgogICAgZm9udC1mYW1pbHk9Ikdlb3JnaWEsICdUaW1lcyBOZXcgUm9tYW4nLCBzZXJpZiIKICAgIGZvbnQtc2l6ZT0iNTQiCiAgICBmb250LXdlaWdodD0ibm9ybWFsIgogICAgZm9udC1zdHlsZT0ibm9ybWFsIgogICAgdGV4dC1hbmNob3I9Im1pZGRsZSIKICAgIGZpbGw9IndoaXRlIgogICAgb3BhY2l0eT0iMC45NyIKICAgIHN0eWxlPSJsZXR0ZXItc3BhY2luZzotMXB4OyI+UzwvdGV4dD4KICA8IS0tIFN1YnRsZSBpbm5lciB0ZXh0IGdsb3cgLS0+CiAgPHRleHQKICAgIHg9IjUwIiB5PSI2NiIKICAgIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCAnVGltZXMgTmV3IFJvbWFuJywgc2VyaWYiCiAgICBmb250LXNpemU9IjU0IgogICAgZm9udC13ZWlnaHQ9Im5vcm1hbCIKICAgIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMzUpIgogICAgZmlsdGVyPSJ1cmwoI3NoYWRvdykiCiAgICBzdHlsZT0ibGV0dGVyLXNwYWNpbmc6LTFweDsiPlM8L3RleHQ+Cjwvc3ZnPg==" alt="Sophia AI Logo" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;">
       <span>Sophia AI</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
+      <li><a href="../index.html#features">Features</a></li>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#integrations">Integrations</a></li>
-      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="../index.html#pricing">Pricing</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="../blog.html">Blog</a></li>
     </ul>
     <button onclick="openCalendly()" class="nav-cta">Book a Demo</button>
     <button class="nav-mobile-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
   </div>
 </nav>
 
-<div class="blog-hero">
-  <h1>Sophia AI Blog</h1>
-  <p>Insights on AI, primary care operations, and building a better patient experience.</p>
+<div class="post-hero">
+  <div class="post-hero-inner">
+    <span class="post-category">Practice Growth</span>
+    <h1>What Patient No-Shows Are Really Costing Your Primary Care Practice — And How 24/7 Scheduling Fixes It</h1>
+    <div class="post-meta">
+      <span class="post-date"><i class="far fa-calendar"></i> June 2, 2026</span>
+      <span class="post-author"><i class="far fa-user"></i> Sophia AI Team</span>
+    </div>
+  </div>
 </div>
 
-<section class="blog-grid-section">
-  <div class="blog-grid">
-    
-    <article class="blog-card">
-      <div class="blog-card-category">Practice Growth</div>
-      <h2 class="blog-card-title"><a href="blog/reduce-patient-no-shows-primary-care.html">What Patient No-Shows Are Really Costing Your Primary Care Practice — And How 24/7 Scheduling Fixes It</a></h2>
-      <p class="blog-card-excerpt">The average independent primary care practice loses over $150,000 per year to patient no-shows. The fix isn't more reminder calls — it's making sure patients can book whenever they're ready.</p>
-      <div class="blog-card-footer">
-        <span class="blog-card-date"><i class="far fa-calendar"></i> June 2, 2026</span>
-        <a href="blog/reduce-patient-no-shows-primary-care.html" class="blog-card-read">Read more <i class="fas fa-arrow-right"></i></a>
+<article class="post-content">
+  <div class="post-content-inner">
+    <p><strong>The average independent primary care practice loses over $150,000 per year to patient no-shows. The fix isn't more reminder calls — it's making sure patients can book whenever they're ready.</strong></p>
+
+    <h2>The No-Show Problem by the Numbers</h2>
+    <p>Let's start with the math. The national no-show rate for primary care hovers between 12% and 23%, depending on the practice and patient population. For a clinic seeing 25 patients per day at an average reimbursement of $110 per visit, a 15% no-show rate means:</p>
+    <ul>
+      <li><strong>3.75 empty slots every day</strong></li>
+      <li><strong>$412.50 in lost revenue daily</strong></li>
+      <li><strong>$103,125 per year — from no-shows alone</strong></li>
+    </ul>
+    <p>That's before accounting for the staff time spent calling patients, the clinical downtime between visits, and the patients who could have filled those slots but went elsewhere. Tally it all up, and the real annual cost easily crosses $150,000.</p>
+    <p>And that's just the direct financial hit.</p>
+
+    <h2>Why Patients Miss Appointments (It's Not What You Think)</h2>
+    <p>Most practices assume patients skip because they forgot. Reminder texts and calls help, but they only address part of the problem. Research from the American Journal of Managed Care identifies several deeper causes:</p>
+    <ul>
+      <li><strong>They couldn't get through when they tried to reschedule.</strong> If your front desk is on another call or it's after hours, the patient gives up.</li>
+      <li><strong>The appointment was booked weeks ago and their situation changed.</strong> Life happens — new work obligations, childcare gaps, transportation issues.</li>
+      <li><strong>They didn't feel urgency.</strong> If booking felt too easy and impersonal, patients deprioritize it.</li>
+      <li><strong>They were anxious about the visit.</strong> Dental anxiety gets all the press, but medical anxiety drives no-shows too — especially for follow-ups where bad news is possible.</li>
+    </ul>
+    <p>Notice a pattern? Most of these happen <em>before</em> the reminder window. By the time your automated text goes out 24 hours ahead, the patient has already mentally cancelled.</p>
+
+    <h2>The Domino Effect: One No-Show, Five Consequences</h2>
+    <p>A single missed appointment doesn't just leave an empty exam room. It triggers a chain reaction:</p>
+    <ol>
+      <li><strong>Lost visit revenue</strong> — the obvious one.</li>
+      <li><strong>Gap in care continuity</strong> — diabetic patients who skip checkups have worse outcomes. Hypertension goes unmonitored. The practice bears the clinical risk.</li>
+      <li><strong>Staff scrambling to fill the slot</strong> — front desk time that could go to patient check-in or billing gets burned on last-minute calls.</li>
+      <li><strong>Provider downtime</strong> — a physician with an empty 10:30 slot can't make that time back.</li>
+      <li><strong>The slot stays empty</strong> — most no-show slots never get filled same-day. The opportunity is gone forever.</li>
+    </ol>
+    <p>Multiply that by 3.75 slots a day, and you're looking at a structural drain on the practice — not an occasional annoyance.</p>
+
+    <h2>How 24/7 Scheduling Changes Patient Behavior</h2>
+    <p>Here's where it gets interesting. Practices that enable 24/7 scheduling — meaning patients can call <em>any time</em> and reach a live voice that books real appointments — see no-show rates drop by 30-40%.</p>
+    <p>Why?</p>
+    <p><strong>Patients book at the moment of motivation.</strong> Someone thinks "I really need to get this cough checked" at 8 PM on a Thursday. If they can call right then and book, they commit. If they have to wait until morning and call during work hours, that window of motivation closes.</p>
+    <p><strong>Rescheduling is effortless.</strong> A patient with a Tuesday 9 AM who gets called into an early meeting can call Sunday evening, move the appointment to Wednesday, and show up. Without that option, they just don't come Tuesday morning.</p>
+    <p><strong>The commitment feels real.</strong> Talking to a voice — even an AI voice — creates more accountability than clicking a web portal link. Patients who speak their appointment into existence are measurably more likely to keep it.</p>
+    <p>This isn't theory. A 2023 study in the Journal of Medical Internet Research found that AI-powered scheduling interventions reduced no-shows by 34% compared to traditional reminder-only approaches.</p>
+
+    <h2>Real Numbers: What Happens When You Never Miss a Call</h2>
+    <p>Let's return to our hypothetical practice seeing 25 patients a day with a 15% no-show rate:</p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="compare-label">Before</div>
+        <div class="compare-stat">15%</div>
+        <div class="compare-sub">No-show rate</div>
+        <div class="compare-stat">3.75</div>
+        <div class="compare-sub">Empty slots/day</div>
+        <div class="compare-stat">$412.50</div>
+        <div class="compare-sub">Lost revenue/day</div>
       </div>
-    </article>
-    <article class="blog-card">
-      <div class="blog-card-category">Blog</div>
-      <h2 class="blog-card-title"><a href="blog/post-2026-06-01-001.html">What Primary Care Practices Lose When Patients Go to Voicemail</a></h2>
-      <p class="blog-card-excerpt">Every unanswered call is a patient who needed you — and may not call back. For independent primary care practices, the math is sobering....</p>
-      <div class="blog-card-footer">
-        <span class="blog-card-date"><i class="far fa-calendar"></i> June 2026</span>
-        <a href="blog/post-2026-06-01-001.html" class="blog-card-read">Read more <i class="fas fa-arrow-right"></i></a>
+      <div class="compare-card highlight">
+        <div class="compare-label">After 24/7 Scheduling</div>
+        <div class="compare-stat">9%</div>
+        <div class="compare-sub">No-show rate (40% reduction)</div>
+        <div class="compare-stat">2.25</div>
+        <div class="compare-sub">Empty slots/day</div>
+        <div class="compare-stat">$247.50</div>
+        <div class="compare-sub">Lost revenue/day</div>
       </div>
-    </article>
-    <article class="blog-card">
-      <div class="blog-card-category">Blog</div>
-      <h2 class="blog-card-title"><a href="blog/post-2026-06-01-002.html">The Real Cost of Claim Denials in Primary Care — And How to Stop Them Before They Happen</a></h2>
-      <p class="blog-card-excerpt">The average independent primary care practice loses $40,000 to $120,000 per year to preventable claim denials. The surprising part? Most of these denials are fixed with a single ch...</p>
-      <div class="blog-card-footer">
-        <span class="blog-card-date"><i class="far fa-calendar"></i> June 2026</span>
-        <a href="blog/post-2026-06-01-002.html" class="blog-card-read">Read more <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <p style="margin-top:1.5rem;"><strong>Annual revenue recovered: $41,250.</strong> Plus ~5 hours/week of staff time saved from not chasing cancellations. That's a new hire's salary in many markets — or just margin back in your pocket.</p>
+
+    <h2>What to Look for in an AI Scheduling Solution</h2>
+    <p>If you're evaluating options to reduce patient no-shows, here's what matters:</p>
+    <ul>
+      <li><strong>24/7 live voice answering.</strong> Text reminders are table stakes. The practices seeing the biggest no-show reductions are the ones where patients can talk to a voice anytime.</li>
+      <li><strong>Real EHR integration.</strong> If the AI can't check your actual schedule in real time, it's just a message-taker. Patients need real availability, not "someone will call you back."</li>
+      <li><strong>Insurance verification at the time of booking.</strong> A patient who knows their visit is covered before they hang up is far more likely to show up.</li>
+      <li><strong>Automatic confirmation and follow-up.</strong> The system should confirm via SMS immediately, then follow up at the right intervals — without staff touching anything.</li>
+      <li><strong>HIPAA compliance with a BAA.</strong> Non-negotiable for any patient communication.</li>
+    </ul>
+
+    <h2>The Bottom Line</h2>
+    <p>Patient no-shows aren't a scheduling problem. They're an access problem. When patients can reach your practice on their timeline — not yours — they book more appointments, keep more appointments, and get better care.</p>
+    <p>For most independent primary care practices, <strong>the single highest-ROI change you can make isn't a new provider or a marketing campaign. It's making sure your phone never goes unanswered.</strong></p>
+    <p>When a patient decides they need care, that moment is your best chance to serve them. Don't let it ring to voicemail.</p>
+
+    <div class="post-cta">
+      <h3>See it in action</h3>
+      <p>Want to see what 24/7 patient scheduling looks like? Try calling Sophia yourself — no signup needed.</p>
+      <div class="post-cta-buttons">
+        <a href="../index.html#demo" class="btn-primary">Book a Demo</a>
+        <a href="../index.html#try" class="btn-outline">Try Calling Sophia</a>
       </div>
-    </article>
-    <article class="blog-card">
-      <div class="blog-card-category">Blog</div>
-      <h2 class="blog-card-title"><a href="blog/post-2026-06-01-003.html">How AI Is Solving the Primary Care Staffing Crisis — Without Replacing Anyone</a></h2>
-      <p class="blog-card-excerpt">Primary care is short 17,000 physicians and will need 48,000 more by 2034. But there's a quieter crisis happening at the front desk that no one's talking about....</p>
-      <div class="blog-card-footer">
-        <span class="blog-card-date"><i class="far fa-calendar"></i> June 2026</span>
-        <a href="blog/post-2026-06-01-003.html" class="blog-card-read">Read more <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </article>
+    </div>
+
+    <div class="post-related">
+      <h3>Related Reading</h3>
+      <ul>
+        <li><a href="post-2026-06-01-001.html">What Primary Care Practices Lose When Patients Go to Voicemail</a></li>
+        <li><a href="post-2026-06-01-003.html">How AI Is Solving the Primary Care Staffing Crisis — Without Replacing Anyone</a></li>
+      </ul>
+    </div>
   </div>
-</section>
+</article>
 
 <footer>
   <div class="footer-inner">

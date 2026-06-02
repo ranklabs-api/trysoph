@@ -1,0 +1,18 @@
+{
+  "customer_id": "trysoph",
+  "business_name": "Sophia AI",
+  "site_url": "https://trysoph.com",
+  "contact_name": "Jeremiah",
+  "contact_email": "jeremiah@oursophia.com",
+  "plan": "internal",
+  "plan_features": [
+    "seo_audit",
+    "blog_posts",
+    "site_updates"
+  ],
+  "cf_project": "trysoph",
+  "github_repo": "ranklabs-api/trysoph",
+  "type": "cloudflare-pages",
+  "provisioning_state": "migrating",
+  "ga4_property_id": null
+}
