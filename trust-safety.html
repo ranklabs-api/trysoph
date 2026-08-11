@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sophia AI — Trust &amp; Safety</title>
+<style>
+  /* ============ PRINT SETUP ============ */
+  @page {
+    size: letter landscape;
+    margin: 0;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+  }
+  .slide {
+    width: 11in;
+    height: 8.5in;
+    overflow: hidden;
+    position: relative;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 0.65in 0.85in;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  /* ============ SCREEN: SLIDESHOW ============ */
+  @media screen {
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #0f172a;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide {
+      display: none;
+      width: 11in !important;
+      height: 8.5in !important;
+      margin: 0 !important;
+      transform-origin: center center;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.55);
+      position: absolute;
+    }
+    .slide.active { display: flex !important; }
+
+    /* Navigation arrows */
+    .ss-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      line-height: 1;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .ss-arrow:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.4); }
+    .ss-arrow:active { background: rgba(96,165,250,0.35); }
+    .ss-prev { left: 24px; }
+    .ss-next { right: 24px; }
+
+    /* Dot navigation */
+    .ss-dots {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10000;
+    }
+    .ss-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .ss-dot.active { background: #60a5fa; transform: scale(1.45); }
+    .ss-dot:hover { background: rgba(255,255,255,0.5); }
+
+    /* Slide counter */
+    .ss-counter {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      z-index: 10000;
+    }
+  }
+
+  /* ============ PRINT RULES (unchanged) ============ */
+  @media print {
+    .ss-arrow, .ss-dots, .ss-counter { display: none !important; }
+    .slide { display: flex !important; }
+  }
+
+  /* ============ BACKGROUNDS ============ */
+  .bg-white  { background: #ffffff; }
+  .bg-blue   { background: #eff6ff; }
+  .bg-gray   { background: #f8fafc; }
+  .bg-hero   { background: linear-gradient(160deg, #eef4ff 0%, #dbeafe 40%, #c7d9fd 100%); }
+  .bg-dark   { background: linear-gradient(150deg, #0f172a 0%, #1e293b 55%, #1e3a8a 100%); color: #f1f5f9; }
+
+  /* ============ DECOR ============ */
+  .edge-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 14px;
+    background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+  }
+  .corner-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0.42in;
+    left: 0.85in;
+    right: 0.85in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+  .footer .brand { font-weight: 700; color: #2563eb; }
+  .footer .pagenum {
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 3px 12px;
+    letter-spacing: 0.05em;
+  }
+  .bg-dark .footer { color: #94a3b8; }
+  .bg-dark .footer .brand { color: #93c5fd; }
+
+  /* ============ TYPOGRAPHY / COMPONENTS ============ */
+  .fear-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .fear-chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #60a5fa;
+    display: inline-block;
+  }
+  .fear-quote {
+    font-size: 19px;
+    font-style: italic;
+    color: #475569;
+    margin-bottom: 18px;
+  }
+  h1.slide-title {
+    font-size: 44px;
+    line-height: 1.08;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+  }
+  .accent-bar {
+    width: 88px;
+    height: 7px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    margin: 18px 0 26px 0;
+  }
+  .lede {
+    font-size: 21px;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 22px;
+    max-width: 8.6in;
+  }
+
+  ul.iconlist { list-style: none; }
+  ul.iconlist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 19.5px;
+    line-height: 1.42;
+    margin-bottom: 16px;
+    max-width: 8.8in;
+  }
+  ul.iconlist .ic {
+    flex: 0 0 34px;
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  ul.iconlist .ic.soft { background: #bfdbfe; color: #1e40af; }
+
+  .pullquote {
+    border-left: 7px solid #2563eb;
+    background: #eff6ff;
+    border-radius: 0 14px 14px 0;
+    padding: 20px 26px;
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 600;
+    color: #1e40af;
+    max-width: 8.8in;
+    margin-bottom: 24px;
+  }
+  .bg-blue .pullquote { background: #ffffff; }
+
+  .bold-banner {
+    margin-top: auto;
+    margin-bottom: 0.55in;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 22px 30px;
+    font-size: 21.5px;
+    font-weight: 700;
+    line-height: 1.35;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+  }
+  .bold-banner .kicker {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #93c5fd;
+    margin-bottom: 6px;
+  }
+
+  .two-col {
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+  }
+  .card {
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+
+  /* ============ SLIDE 1 (HERO) ============ */
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: #ffffff;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 999px;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.18);
+    margin-bottom: 30px;
+    align-self: flex-start;
+  }
+  .hero-title {
+    font-size: 74px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.03;
+    color: #0f172a;
+  }
+  .hero-title .blue { color: #2563eb; }
+  .hero-sub {
+    font-size: 27px;
+    font-weight: 500;
+    color: #334155;
+    margin-top: 22px;
+    max-width: 7.6in;
+  }
+  .hero-rule {
+    width: 120px; height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    margin-top: 34px;
+  }
+  .hero-footer {
+    position: absolute;
+    bottom: 0.6in;
+    left: 0.85in;
+    right: 0.85in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #334155;
+    z-index: 2;
+  }
+  .hero-footer .site {
+    background: #2563eb;
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  /* ============ NUMBERED PHASE CARDS (slide 15) ============ */
+  .phase-row { display: flex; gap: 24px; margin-bottom: 26px; }
+  .phase-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    border-top: 8px solid #2563eb;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    padding: 22px 22px 20px 22px;
+  }
+  .phase-card .ph-num {
+    display: inline-block;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .phase-card h3 { font-size: 23px; color: #0f172a; margin-bottom: 8px; }
+  .phase-card p { font-size: 16.5px; line-height: 1.45; color: #475569; }
+  .phase-card.p2 { border-top-color: #3b82f6; }
+  .phase-card.p3 { border-top-color: #60a5fa; }
+
+  /* ============ FEATURE GRID (slide 14) ============ */
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .feat {
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 18px 18px 16px 18px;
+  }
+  .feat .fic {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #ffffff;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .feat h4 { font-size: 17.5px; color: #0f172a; margin-bottom: 6px; }
+  .feat p { font-size: 14px; line-height: 1.42; color: #475569; }
+
+  /* ============ TIMELINE (slide 8) ============ */
+  .timeline-chip {
+    display: inline-block;
+    background: #0f172a;
+    color: #93c5fd;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  /* ============ CTA / FINAL SLIDE ============ */
+  .phone-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    border: 2.5px solid #2563eb;
+    border-radius: 999px;
+    padding: 14px 30px;
+    font-size: 25px;
+    font-weight: 800;
+    color: #1e40af;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
+  }
+  .phone-cta .pic {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ SLIDE 1 : TITLE ============================ -->
+<div class="slide bg-hero">
+  <div class="corner-circle" style="width:5.5in;height:5.5in;right:-2.1in;top:-2.1in;background:radial-gradient(circle at 35% 65%, rgba(37,99,235,0.20), rgba(37,99,235,0.04) 70%);"></div>
+  <div class="corner-circle" style="width:3.6in;height:3.6in;left:-1.5in;bottom:-1.5in;background:radial-gradient(circle at 60% 40%, rgba(255,255,255,0.9), rgba(255,255,255,0) 72%);"></div>
+  <div class="corner-circle" style="width:1.4in;height:1.4in;right:1.6in;bottom:1.5in;border:3px solid rgba(37,99,235,0.25);background:transparent;"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">For Private Practice Physicians &nbsp;·&nbsp; Trust &amp; Safety Overview</span>
+    <div class="hero-title">Sophia AI<br><span class="blue">Trust &amp; Safety</span></div>
+    <div class="hero-rule"></div>
+    <div class="hero-sub">Built to protect the reputation you spent years earning.</div>
+  </div>
+  <div class="hero-footer">
+    <span>Sophia AI LLC &nbsp;·&nbsp; Created by physicians</span>
+    <span class="site">trysoph.com</span>
+  </div>
+</div>
+
+<!-- ============================ SLIDE 2 ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear Nobody Says Out Loud</span>
+    <h1 class="slide-title">One bad call. Fifteen years of trust.</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <div class="pullquote">&ldquo;I'm not worried about the cost. I'm worried one bad AI call costs me a patient I've had for fifteen years.&rdquo;</div>
+  <ul class="iconlist">
+    <li><span class="ic">1</span><span>You didn't buy your reputation. You built it — one patient, one referral at a time.</span></li>
+    <li><span class="ic">2</span><span>A bad front desk experience doesn't stay private. It becomes a review, a phone call to a friend, a patient who quietly leaves.</span></li>
+    <li><span class="ic">3</span><span>Most AI vendors ask you to take that risk on faith.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Our position</span>Your concern is well-founded. We designed Sophia around it.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">2 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 3 ============================ -->
+<div class="slide bg-blue">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;An AI is going to be turned loose on my patients.&rdquo;</div>
+    <h1 class="slide-title">What We're <span style="color:#2563eb;">Not</span> Asking You to Do</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to replace your receptionist.</span></li>
+    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to hand over your phones on day one.</span></li>
+    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to trust software you haven't heard yet.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">What Sophia is</span>Sophia is a safety net — she catches the calls that would otherwise hit voicemail, and she steps aside the moment a human should take over.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">3 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 4 ============================ -->
+<div class="slide bg-gray">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;What happens when the AI doesn't know the answer?&rdquo;</div>
+    <h1 class="slide-title">Safety-First by Design</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">Sophia's core programming rule: when in doubt, transfer to a human.</div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">✓</span><span>She never guesses about medical matters.</span></li>
+    <li><span class="ic">✓</span><span>She never improvises clinical advice.</span></li>
+    <li><span class="ic">✓</span><span>She never assumes what your practice policy is.</span></li>
+    <li><span class="ic">✓</span><span>Any question she isn't fully confident about goes to your staff.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">The principle</span>An AI that says &ldquo;let me get someone for you&rdquo; is safer than one that tries to be impressive.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">4 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 5 ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;Patients will feel tricked.&rdquo;</div>
+    <h1 class="slide-title">Radical Transparency</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">Sophia always identifies herself as an AI. Every call. No exceptions.</div>
+  </div>
+  <div class="pullquote">&ldquo;Hi, I'm Sophia, an AI assistant with Dr.&nbsp;Smith's office.&rdquo;</div>
+  <ul class="iconlist">
+    <li><span class="ic soft">◆</span><span>No fake names. No pretending to be human.</span></li>
+    <li><span class="ic soft">◆</span><span>Introduced as part of your team — not a random robot answering service.</span></li>
+    <li><span class="ic soft">◆</span><span>Patients consistently forgive an AI that's honest. They don't forgive one that deceives.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Why it works</span>Honesty up front removes the moment where a patient feels fooled.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">5 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 6 ============================ -->
+<div class="slide bg-blue">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;What if a patient just wants a real person?&rdquo;</div>
+    <h1 class="slide-title">The Escape Hatch — On Every Single Call</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">Within the first seconds of every call, Sophia offers the exit:</div>
+  </div>
+  <div class="pullquote">&ldquo;If you'd prefer to speak with our receptionist, I can transfer you right now.&rdquo;</div>
+  <ul class="iconlist">
+    <li><span class="ic">→</span><span>The patient never has to ask twice.</span></li>
+    <li><span class="ic">→</span><span>The patient never has to fight a phone tree.</span></li>
+    <li><span class="ic">→</span><span>No patient is ever trapped with an AI.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">The paradox</span>A patient who can leave the conversation at any time rarely wants to.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">6 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 7 ============================ -->
+<div class="slide bg-gray">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;The AI won't know when something is going wrong.&rdquo;</div>
+    <h1 class="slide-title">Smart Escalation Triggers</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">Sophia listens for the moments that need a human and transfers immediately:</div>
+  </div>
+  <ul class="iconlist" style="column-count:1;">
+    <li><span class="ic">!</span><span>Patient frustration or confusion</span></li>
+    <li><span class="ic">!</span><span>Hesitation or uncertainty in the patient's voice</span></li>
+    <li><span class="ic">!</span><span>Medical urgency or crisis language</span></li>
+    <li><span class="ic">!</span><span>&ldquo;Let me speak to a real person&rdquo;</span></li>
+    <li><span class="ic">!</span><span>Any request outside what she's confident handling</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Built-in safeguard</span>Crisis detection is built in — urgent symptoms are identified, staff are connected, and patients are directed to 911 when appropriate.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">7 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 8 ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;You'll flip a switch and walk away.&rdquo;</div>
+    <h1 class="slide-title">Shadow Mode — She Listens Before She Speaks</h1>
+    <div class="accent-bar"></div>
+    <span class="timeline-chip">Weeks 1–2 &nbsp;·&nbsp; Sophia takes zero live calls</span>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic soft">👂</span><span>She listens and learns your scripts, your policies, your patterns.</span></li>
+    <li><span class="ic soft">🔍</span><span>Our team reviews every interaction before it ever reaches a patient.</span></li>
+    <li><span class="ic soft">🟢</span><span>She goes live only when <strong>you</strong> say go — not on a vendor's timeline.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Our onboarding standard</span>White-glove onboarding, not a self-serve switch. We earn trust before we ask for it.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">8 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 9 ============================ -->
+<div class="slide bg-blue">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;My front desk staff will be replaced — or undermined.&rdquo;</div>
+    <h1 class="slide-title">Hybrid Mode — Sophia and Your Receptionist, Together</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">Calls are shared between Sophia and your human receptionist.</div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">⇄</span><span><strong>Peak hours:</strong> Sophia takes the overflow instead of sending patients to hold.</span></li>
+    <li><span class="ic">★</span><span>Your receptionist stays the primary voice of the practice.</span></li>
+    <li><span class="ic">✓</span><span>Nobody waits on hold. Nobody hits voicemail.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">The outcome</span>Staff relief, not staff replacement. Your team handles the patients in front of them.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">9 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 10 ============================ -->
+<div class="slide bg-gray">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;Once the AI has the call, I've lost control of it.&rdquo;</div>
+    <h1 class="slide-title">Live Barge-In — Your Staff Can Take Over Instantly</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">🎧</span><span>Your receptionist can listen to any Sophia call in real time.</span></li>
+    <li><span class="ic">1</span><span><strong>One click</strong> takes over the call.</span></li>
+    <li><span class="ic">↩</span><span>Sophia never competes for control — she hands off and steps back.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Chain of command</span>The human is always in charge. Sophia is the one who defers.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">10 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 11 ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;I'll have no idea what the AI is telling my patients.&rdquo;</div>
+    <h1 class="slide-title">Every Call Recorded, Transcribed, Searchable</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">●</span><span>Every Sophia call is recorded and transcribed.</span></li>
+    <li><span class="ic">⌕</span><span>Full review dashboard — search any call, any patient, any day.</span></li>
+    <li><span class="ic">◎</span><span>Nothing about how Sophia talks to your patients is hidden from you.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Full visibility</span>If something goes wrong, you'll see it before a patient tells you about it — and we'll fix it.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">11 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 12 ============================ -->
+<div class="slide bg-blue">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;How will I know patients actually liked it?&rdquo;</div>
+    <h1 class="slide-title">Proof from the Patients Themselves</h1>
+    <div class="accent-bar"></div>
+    <div class="lede">After every Sophia-handled call, an automated SMS asks: &ldquo;How was your experience?&rdquo;</div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">★</span><span>Ratings tracked, reported, and reviewed with you.</span></li>
+    <li><span class="ic">📊</span><span>You get patient sentiment data — not vendor promises.</span></li>
+    <li><span class="ic">↓</span><span>If satisfaction drops, you'll know immediately and can dial coverage back.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Accountability</span>You shouldn't have to take our word for it. You won't have to.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">12 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 13 ============================ -->
+<div class="slide bg-gray">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;I have no idea what this actually sounds like.&rdquo;</div>
+    <h1 class="slide-title">Hear Her Before You Decide</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <div style="margin-bottom:26px;">
+    <span class="phone-cta"><span class="pic">✆</span>(954) 419-5004</span>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic">✆</span><span>Call Sophia yourself right now: <strong>(954) 419-5004</strong>. No demo scheduled, no salesperson.</span></li>
+    <li><span class="ic">⇄</span><span>Side-by-side comparison: a live Sophia call vs. what a missed call sounds like today.</span></li>
+    <li><span class="ic">▶</span><span>Review real call recordings from practices already running her.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Try before trust</span>Judge the voice your patients will hear — before a single patient hears it.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">13 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 14 ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote" style="margin-bottom:10px;">&ldquo;Is this even worth the risk?&rdquo;</div>
+    <h1 class="slide-title" style="font-size:38px;">What Sophia Handles Once You're Comfortable</h1>
+    <div class="accent-bar" style="margin:14px 0 20px 0;"></div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat"><div class="fic">☾</div><h4>24/7 coverage</h4><p>Every call answered — no hold, no voicemail.</p></div>
+    <div class="feat"><div class="fic">📅</div><h4>Books directly into your EMR</h4><p>Athena, Tebra, eClinicalWorks, Elation, DrChrono.</p></div>
+    <div class="feat"><div class="fic">🛡</div><h4>Real-time insurance verification</h4><p>Eligibility, copays, coverage at the moment of scheduling.</p></div>
+    <div class="feat"><div class="fic">↻</div><h4>Outbound follow-up</h4><p>Pursues inquiries until they book (~60% booking rate).</p></div>
+    <div class="feat"><div class="fic">✓</div><h4>Cleaner claims</h4><p>Verified eligibility up front means fewer front-end denials.</p></div>
+    <div class="feat"><div class="fic">⚕</div><h4>HIPAA compliant, BAA included</h4><p>Backed by ElevenLabs Grants.</p></div>
+  </div>
+  <div class="bold-banner" style="padding:16px 30px;font-size:19.5px;"><span class="kicker">No disruption</span>Works with your existing system. No rip-and-replace, no workflow disruption.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">14 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 15 ============================ -->
+<div class="slide bg-blue">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="fear-chip"><span class="dot"></span>The Fear</span>
+    <div class="fear-quote">&ldquo;I'll be locked into something I can't back out of.&rdquo;</div>
+    <h1 class="slide-title">You Control the Pace</h1>
+    <div class="accent-bar"></div>
+  </div>
+  <div class="phase-row">
+    <div class="phase-card">
+      <span class="ph-num">Phase 1</span>
+      <h3>After hours</h3>
+      <p>Nights and weekends only. The calls you're already missing.</p>
+    </div>
+    <div class="phase-card p2">
+      <span class="ph-num">Phase 2</span>
+      <h3>Overflow</h3>
+      <p>Peak hours, when your team is already on another line.</p>
+    </div>
+    <div class="phase-card p3">
+      <span class="ph-num">Phase 3</span>
+      <h3>Full coverage</h3>
+      <p>Only when you're ready. Only <em>if</em> you're ready.</p>
+    </div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic soft">◆</span><span>No timeline. No pressure. No phase you're required to reach.</span></li>
+    <li><span class="ic soft">↩</span><span>You can move backward at any point.</span></li>
+  </ul>
+  <div class="bold-banner"><span class="kicker">Your schedule</span>Every practice moves at its own speed. Yours sets the schedule.</div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">15 / 16</span></div>
+</div>
+
+<!-- ============================ SLIDE 16 : CLOSE ============================ -->
+<div class="slide bg-dark">
+  <div class="corner-circle" style="width:5in;height:5in;right:-1.9in;top:-1.9in;background:radial-gradient(circle at 40% 60%, rgba(96,165,250,0.28), rgba(96,165,250,0.02) 70%);"></div>
+  <div class="corner-circle" style="width:3in;height:3in;left:-1.2in;bottom:-1.2in;background:radial-gradient(circle at 60% 40%, rgba(37,99,235,0.35), rgba(37,99,235,0) 72%);"></div>
+  <div style="position:relative;z-index:2;">
+    <span class="fear-chip" style="background:#2563eb;"><span class="dot" style="background:#ffffff;"></span>The Fear</span>
+    <div class="fear-quote" style="color:#94a3b8;">&ldquo;What if it doesn't work for my practice?&rdquo;</div>
+    <h1 class="slide-title" style="color:#ffffff;">Risk-Free. The Relationship Is <span style="color:#60a5fa;">Earned Monthly.</span></h1>
+    <div class="accent-bar"></div>
+  </div>
+  <ul class="iconlist" style="position:relative;z-index:2;">
+    <li><span class="ic">30</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">30-day free beta trial</strong> — cancel anytime</span></li>
+    <li><span class="ic">∞</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Month-to-month</strong> after that — no long-term contracts</span></li>
+    <li><span class="ic">48</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Setup in ~48 hours</strong>, with no disruption to your workflow</span></li>
+    <li><span class="ic">✓</span><span style="color:#e2e8f0;">If it isn't working, walk away. <strong style="color:#ffffff;">The relationship is earned monthly.</strong></span></li>
+  </ul>
+  <div style="position:relative;z-index:2;border-left:7px solid #60a5fa;background:rgba(37,99,235,0.18);border-radius:0 14px 14px 0;padding:16px 24px;font-size:20px;font-style:italic;font-weight:600;color:#bfdbfe;max-width:8.8in;margin:6px 0 22px 0;">&ldquo;The front desk that never calls in sick, never puts a patient on hold, and never misses a call.&rdquo;</div>
+  <div style="position:relative;z-index:2;margin-top:auto;margin-bottom:0.5in;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;">
+    <div>
+      <div style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#60a5fa;margin-bottom:8px;">Try it yourself — call Sophia</div>
+      <span class="phone-cta" style="background:#2563eb;border-color:#60a5fa;color:#ffffff;"><span class="pic" style="background:#ffffff;color:#2563eb;">✆</span>(954) 419-5004</span>
+    </div>
+    <div style="text-align:right;font-size:16px;line-height:1.6;color:#cbd5e1;">
+      <strong style="color:#ffffff;font-size:18px;">Jeremiah Earl, DO</strong> · Co-founder, Sophia AI LLC<br>
+      jeremiah@oursophia.com &nbsp;·&nbsp; <span style="color:#60a5fa;font-weight:700;">trysoph.com</span>
+    </div>
+  </div>
+  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">16 / 16</span></div>
+</div>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const N = slides.length;
+  let idx = 0;
+
+  // Create nav UI
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'ss-arrow ss-prev';
+  prevBtn.innerHTML = '&#8249;';
+  prevBtn.title = 'Previous (←)';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'ss-arrow ss-next';
+  nextBtn.innerHTML = '&#8250;';
+  nextBtn.title = 'Next (→)';
+
+  const dotsEl = document.createElement('div');
+  dotsEl.className = 'ss-dots';
+  const dots = [];
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement('button');
+    d.className = 'ss-dot';
+    d.title = 'Slide ' + (i+1);
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+
+  const counter = document.createElement('div');
+  counter.className = 'ss-counter';
+
+  document.body.appendChild(prevBtn);
+  document.body.appendChild(nextBtn);
+  document.body.appendChild(dotsEl);
+  document.body.appendChild(counter);
+
+  // Scale slides to fit viewport
+  function rescale() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const slideW = 11 * 96; // 11 inches in px at 96dpi
+    const slideH = 8.5 * 96;
+    const scale = Math.min((vw * 0.94) / slideW, (vh * 0.90) / slideH, 1);
+    slides.forEach(s => { s.style.transform = 'scale(' + scale + ')'; });
+  }
+
+  function go(n) {
+    slides[idx].classList.remove('active');
+    dots[idx].classList.remove('active');
+    idx = ((n % N) + N) % N; // wrap
+    slides[idx].classList.add('active');
+    dots[idx].classList.add('active');
+    counter.textContent = (idx + 1) + ' / ' + N;
+  }
+
+  // Event handlers
+  prevBtn.onclick = () => go(idx - 1);
+  nextBtn.onclick = () => go(idx + 1);
+  dots.forEach((d, i) => { d.onclick = () => go(i); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(idx - 1); }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(idx + 1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(N - 1); }
+  });
+
+  // Touch swipe
+  let touchStartX = 0, touchStartY = 0;
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, {passive: true});
+  document.addEventListener('touchend', e => {
+    const dx = (e.changedTouches[0]?.clientX || 0) - touchStartX;
+    const dy = (e.changedTouches[0]?.clientY || 0) - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      go(dx < 0 ? idx + 1 : idx - 1);
+    }
+  });
+
+  // Init
+  go(0);
+  rescale();
+  window.addEventListener('resize', rescale);
+})();
+</script>
+</body>
+</html>
