@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sophia AI — Trust &amp; Safety</title>
-<meta name="description" content="Sophia AI's Trust &amp; Safety commitment: how our HIPAA-compliant AI front desk protects patient data, ensures AI safety, and earns your practice's trust.">
+<title>Sophia AI — Always Answered | Trust &amp; Safety for Primary Care</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How Sophia AI's HIPAA-compliant AI front desk covers your practice 24/7 — answering after-hours and overflow calls, booking appointments, and handing every call to a human the moment one is asked for.">
 <link rel="canonical" href="https://trysoph.com/trust-safety">
-<meta property="og:title" content="Sophia AI — Trust &amp; Safety">
-<meta property="og:description" content="Sophia AI's Trust &amp; Safety commitment: HIPAA-compliant AI front desk for primary care — protecting patient data and ensuring AI safety.">
+<meta property="og:title" content="Sophia AI — Always Answered | Trust &amp; Safety">
+<meta property="og:description" content="24-hour phone coverage for primary care: a fuller schedule, verified insurance, and a HIPAA-compliant AI front desk that always defers to your staff.">
 <meta property="og:image" content="https://trysoph.com/og-image.png">
 <meta property="og:url" content="https://trysoph.com/trust-safety">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sophia AI — Trust &amp; Safety">
-<meta name="twitter:description" content="How Sophia AI protects patient data and ensures AI safety for primary care practices.">
+<meta name="twitter:title" content="Sophia AI — Always Answered | Trust &amp; Safety">
+<meta name="twitter:description" content="How Sophia AI protects patient data, defers to your staff, and covers the calls your practice misses today.">
 <meta name="twitter:image" content="https://trysoph.com/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Sophia AI — Trust & Safety",
+  "name": "Sophia AI — Always Answered | Trust & Safety",
   "url": "https://trysoph.com/trust-safety",
-  "description": "Sophia AI's Trust & Safety commitment for its HIPAA-compliant AI front desk for primary care.",
+  "description": "How Sophia AI's HIPAA-compliant AI front desk covers primary care practices 24/7 while deferring to human staff.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Sophia AI",
@@ -87,6 +88,8 @@
       transform-origin: center center;
       box-shadow: 0 12px 48px rgba(0,0,0,0.55);
       position: absolute;
+      left: 50%;
+      top: 50%;
     }
     .slide.active { display: flex !important; }
 
@@ -157,10 +160,19 @@
     }
   }
 
-  /* ============ PRINT RULES (unchanged) ============ */
+  /* ============ PRINT RULES ============ */
   @media print {
     .ss-arrow, .ss-dots, .ss-counter { display: none !important; }
-    .slide { display: flex !important; }
+    /* The slideshow's inline transform/offsets are screen-only — an !important
+       declaration here overrides the inline styles set by rescale(). */
+    .slide {
+      display: flex !important;
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
   }
 
   /* ============ BACKGROUNDS ============ */
@@ -208,7 +220,7 @@
   .bg-dark .footer .brand { color: #93c5fd; }
 
   /* ============ TYPOGRAPHY / COMPONENTS ============ */
-  .fear-chip {
+  .tag-chip {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -222,19 +234,19 @@
     border-radius: 999px;
     margin-bottom: 14px;
   }
-  .fear-chip .dot {
+  .tag-chip .dot {
     width: 8px; height: 8px;
     border-radius: 50%;
     background: #60a5fa;
     display: inline-block;
   }
-  .fear-quote {
+  .kicker-line {
     font-size: 19px;
-    font-style: italic;
+    font-weight: 600;
     color: #475569;
     margin-bottom: 18px;
   }
-  h1.slide-title {
+  .slide-title {
     font-size: 44px;
     line-height: 1.08;
     font-weight: 800;
@@ -329,7 +341,192 @@
     padding: 18px 22px;
   }
 
-  /* ============ SLIDE 1 (HERO) ============ */
+  /* ============ STAT TILES ============ */
+  .stat-row { display: flex; gap: 20px; margin-bottom: 22px; }
+  .stat-tile {
+    flex: 1;
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 20px 22px 18px 22px;
+  }
+  .stat-tile .sv {
+    font-size: 46px;
+    font-weight: 800;
+    color: #2563eb;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+  }
+  .stat-tile .sl { font-size: 15px; line-height: 1.4; color: #1e293b; font-weight: 600; }
+  .stat-tile .ss { font-size: 11px; line-height: 1.35; color: #94a3b8; margin-top: 10px; }
+
+  .srcnote {
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: #94a3b8;
+    max-width: 9in;
+    margin-top: 12px;
+    margin-bottom: 0.44in;
+  }
+  .bold-banner.tight { margin-bottom: 14px; }
+
+  /* ============ MATH STRIP ============ */
+  .math-row { display: flex; align-items: stretch; gap: 12px; margin-bottom: 22px; }
+  .math-box {
+    flex: 1;
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .math-box .mb-lbl {
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 10px;
+    display: block;
+    line-height: 1.3;
+  }
+  .math-box .mb-val { font-size: 34px; font-weight: 800; color: #0f172a; line-height: 1; letter-spacing: -0.02em; }
+  .math-box .mb-note { font-size: 11.5px; color: #94a3b8; margin-top: 8px; line-height: 1.3; }
+  .math-box.result { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); border-color: #1e3a8a; flex: 1.25; }
+  .math-box.result .mb-lbl { color: #93c5fd; }
+  .math-box.result .mb-val { color: #ffffff; font-size: 32px; }
+  .math-box.result .mb-note { color: #bfdbfe; font-weight: 700; font-size: 15px; }
+  .math-op { align-self: center; font-size: 26px; font-weight: 800; color: #93c5fd; flex: 0 0 auto; }
+
+  /* ============ SOURCES SLIDE ============ */
+  .src-list { list-style: none; column-count: 2; column-gap: 40px; }
+  .src-list li {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #334155;
+    margin-bottom: 16px;
+    break-inside: avoid;
+    padding-left: 14px;
+    border-left: 3px solid #bfdbfe;
+  }
+  .src-list li strong { color: #0f172a; display: block; margin-bottom: 2px; }
+  .src-list li span { color: #64748b; font-size: 12.5px; }
+
+  /* ============ HOURS STRIP (slide 3) ============ */
+  .hours-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+  .hour-card {
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .hour-card .hc-ic {
+    font-size: 26px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .hour-card h4 { font-size: 17px; color: #0f172a; margin-bottom: 5px; }
+  .hour-card p { font-size: 13.5px; line-height: 1.4; color: #475569; }
+
+  /* ============ NUMBERED PHASE CARDS ============ */
+  .phase-row { display: flex; gap: 24px; margin-bottom: 26px; }
+  .phase-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    border-top: 8px solid #2563eb;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    padding: 22px 22px 20px 22px;
+  }
+  .phase-card .ph-num {
+    display: inline-block;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .phase-card h3 { font-size: 23px; color: #0f172a; margin-bottom: 8px; }
+  .phase-card p { font-size: 16.5px; line-height: 1.45; color: #475569; }
+  .phase-card.p2 { border-top-color: #3b82f6; }
+  .phase-card.p3 { border-top-color: #60a5fa; }
+
+  /* ============ FEATURE GRID ============ */
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+  .feat {
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 18px 18px 16px 18px;
+  }
+  .feat .fic {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #ffffff;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .feat h4 { font-size: 17.5px; color: #0f172a; margin-bottom: 6px; }
+  .feat p { font-size: 14px; line-height: 1.42; color: #475569; }
+
+  /* ============ LOOP / CADENCE (weekly review) ============ */
+  .loop-row {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .loop-step {
+    flex: 1;
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 16px 16px 14px 16px;
+    position: relative;
+  }
+  .loop-step .ls-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .loop-step h4 { font-size: 16.5px; color: #0f172a; margin-bottom: 6px; line-height: 1.25; }
+  .loop-step p { font-size: 13.5px; line-height: 1.42; color: #475569; }
+  .loop-arrow {
+    align-self: center;
+    color: #93c5fd;
+    font-size: 22px;
+    font-weight: 800;
+    flex: 0 0 auto;
+  }
+
+  /* ============ HERO ============ */
   .hero-content {
     flex: 1;
     display: flex;
@@ -365,7 +562,7 @@
     font-weight: 500;
     color: #334155;
     margin-top: 22px;
-    max-width: 7.6in;
+    max-width: 7.8in;
   }
   .hero-rule {
     width: 120px; height: 8px;
@@ -392,74 +589,6 @@
     padding: 8px 20px;
     border-radius: 999px;
     font-weight: 700;
-  }
-
-  /* ============ NUMBERED PHASE CARDS (slide 15) ============ */
-  .phase-row { display: flex; gap: 24px; margin-bottom: 26px; }
-  .phase-card {
-    flex: 1;
-    background: #ffffff;
-    border-radius: 16px;
-    border-top: 8px solid #2563eb;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-    padding: 22px 22px 20px 22px;
-  }
-  .phase-card .ph-num {
-    display: inline-block;
-    background: #eff6ff;
-    color: #2563eb;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 999px;
-    margin-bottom: 12px;
-  }
-  .phase-card h3 { font-size: 23px; color: #0f172a; margin-bottom: 8px; }
-  .phase-card p { font-size: 16.5px; line-height: 1.45; color: #475569; }
-  .phase-card.p2 { border-top-color: #3b82f6; }
-  .phase-card.p3 { border-top-color: #60a5fa; }
-
-  /* ============ FEATURE GRID (slide 14) ============ */
-  .feat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 18px;
-    margin-bottom: 24px;
-  }
-  .feat {
-    background: #ffffff;
-    border: 1.5px solid #bfdbfe;
-    border-radius: 14px;
-    padding: 18px 18px 16px 18px;
-  }
-  .feat .fic {
-    width: 40px; height: 40px;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: #ffffff;
-    font-size: 19px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  .feat h4 { font-size: 17.5px; color: #0f172a; margin-bottom: 6px; }
-  .feat p { font-size: 14px; line-height: 1.42; color: #475569; }
-
-  /* ============ TIMELINE (slide 8) ============ */
-  .timeline-chip {
-    display: inline-block;
-    background: #0f172a;
-    color: #93c5fd;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 9px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
   }
 
   /* ============ CTA / FINAL SLIDE ============ */
@@ -496,10 +625,10 @@
   <div class="corner-circle" style="width:3.6in;height:3.6in;left:-1.5in;bottom:-1.5in;background:radial-gradient(circle at 60% 40%, rgba(255,255,255,0.9), rgba(255,255,255,0) 72%);"></div>
   <div class="corner-circle" style="width:1.4in;height:1.4in;right:1.6in;bottom:1.5in;border:3px solid rgba(37,99,235,0.25);background:transparent;"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow">For Private Practice Physicians &nbsp;·&nbsp; Trust &amp; Safety Overview</span>
-    <div class="hero-title">Sophia AI<br><span class="blue">Trust &amp; Safety</span></div>
+    <span class="hero-eyebrow">For Private Practice Physicians &nbsp;·&nbsp; Practice Overview</span>
+    <h1 class="hero-title">Sophia AI<br><span class="blue">Always Answered</span></h1>
     <div class="hero-rule"></div>
-    <div class="hero-sub">Built to protect the reputation you spent years earning.</div>
+    <div class="hero-sub">A front desk that never closes — 24 hours of coverage, a fuller schedule, and more revenue from the patients already calling you.</div>
   </div>
   <div class="hero-footer">
     <span>Sophia AI LLC &nbsp;·&nbsp; Created by physicians</span>
@@ -511,286 +640,368 @@
 <div class="slide bg-white">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear Nobody Says Out Loud</span>
-    <h1 class="slide-title">One bad call. Fifteen years of trust.</h1>>
+    <span class="tag-chip"><span class="dot"></span>The Opportunity</span>
+    <h2 class="slide-title">Your phone is your busiest revenue channel.</h2>
     <div class="accent-bar"></div>
+    <div class="lede">Every call that gets answered is an appointment that can get booked.</div>
   </div>
-  <div class="pullquote">&ldquo;I'm not worried about the cost. I'm worried one bad AI call costs me a patient I've had for fifteen years.&rdquo;</div>
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="sv">65%</div>
+      <div class="sl">of patients prefer to book by phone — more than online and in person combined.</div>
+      <div class="ss">Phreesia survey of ~14,000 patients</div>
+    </div>
+    <div class="stat-tile">
+      <div class="sv">29.5%</div>
+      <div class="sl">of patient scheduling actions happen outside regular business hours.</div>
+      <div class="ss">Mayo Clinic study, JMIR Medical Informatics, 2021</div>
+    </div>
+    <div class="stat-tile">
+      <div class="sv">$150</div>
+      <div class="sl">average revenue per primary care encounter.</div>
+      <div class="ss">MGMA benchmark, outpatient primary care</div>
+    </div>
+  </div>
   <ul class="iconlist">
-    <li><span class="ic">1</span><span>You didn't buy your reputation. You built it — one patient, one referral at a time.</span></li>
-    <li><span class="ic">2</span><span>A bad front desk experience doesn't stay private. It becomes a review, a phone call to a friend, a patient who quietly leaves.</span></li>
-    <li><span class="ic">3</span><span>Most AI vendors ask you to take that risk on faith.</span></li>
+    <li><span class="ic">↑</span><span>Nearly three in ten scheduling decisions are made when a typical office is closed — and the phone is still where patients want to make them.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Our position</span>Your concern is well-founded. We designed Sophia around it.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">2 / 16</span></div>
+  <div class="bold-banner tight"><span class="kicker">What Sophia does</span>Sophia answers the calls your team can't get to — and turns them into booked appointments.</div>
+  <div class="srcnote">Sources: Phreesia, &ldquo;Appointments and Referrals: Understanding Patients' Preferences&rdquo; (n≈14,000). North F, et al., JMIR Med Inform 2021;9(3):e23450 — 29.5% (354/1,201) of patient self-scheduling actions occurred outside regular business hours. MGMA outpatient encounter benchmark.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">2 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 3 ============================ -->
 <div class="slide bg-blue">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;An AI is going to be turned loose on my patients.&rdquo;</div>
-    <h2 class="slide-title">What We're <span style="color:#2563eb;">Not</span> Asking You to Do</h2>
+    <span class="tag-chip"><span class="dot"></span>24-Hour Coverage</span>
+    <h2 class="slide-title">Open at 2 PM. Open at 2 AM.</h2>
     <div class="accent-bar"></div>
+    <div class="lede">Sophia answers every hour your practice isn't staffed — and every hour it is.</div>
+  </div>
+  <div class="hours-strip">
+    <div class="hour-card"><span class="hc-ic">☾</span><h4>Nights</h4><p>The call that would have hit voicemail books instead.</p></div>
+    <div class="hour-card"><span class="hc-ic">▦</span><h4>Weekends</h4><p>Monday's schedule fills while the office is closed.</p></div>
+    <div class="hour-card"><span class="hc-ic">◷</span><h4>Lunch &amp; breaks</h4><p>Coverage through the hour your front desk steps away.</p></div>
+    <div class="hour-card"><span class="hc-ic">✈</span><h4>Holidays &amp; sick days</h4><p>No coverage gap when your team is out.</p></div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to replace your receptionist.</span></li>
-    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to hand over your phones on day one.</span></li>
-    <li><span class="ic">✕</span><span>We are <strong>not</strong> asking you to trust software you haven't heard yet.</span></li>
+    <li><span class="ic soft">◆</span><span>New patients reach a real, helpful voice on the first try — at the exact moment they decided to find a doctor.</span></li>
+    <li><span class="ic soft">◆</span><span>Your team walks in Monday to appointments already on the schedule, not a voicemail queue to work through.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">What Sophia is</span>Sophia is a safety net — she catches the calls that would otherwise hit voicemail, and she steps aside the moment a human should take over.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">3 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">The result</span>A patient who calls at 9 PM Friday walks in Monday morning — instead of calling the practice down the street.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">3 / 18</span></div>
+</div>
+
+<!-- ============================ SLIDE 4 : THE MATH ============================ -->
+<div class="slide bg-white">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="tag-chip"><span class="dot"></span>Run Your Own Numbers</span>
+    <h2 class="slide-title">What the unanswered calls are worth.</h2>
+    <div class="accent-bar"></div>
+    <div class="lede">Three numbers decide it. Two of them are yours — put your real figures in and see what falls out.</div>
+  </div>
+  <div class="math-row">
+    <div class="math-box">
+      <span class="mb-lbl">After-hours calls<br>per month</span>
+      <div class="mb-val">60</div>
+      <div class="mb-note">Your number</div>
+    </div>
+    <div class="math-op">×</div>
+    <div class="math-box">
+      <span class="mb-lbl">Share that would<br>have booked</span>
+      <div class="mb-val">40%</div>
+      <div class="mb-note">Your number</div>
+    </div>
+    <div class="math-op">×</div>
+    <div class="math-box">
+      <span class="mb-lbl">Revenue per<br>encounter</span>
+      <div class="mb-val">$150</div>
+      <div class="mb-note">MGMA benchmark</div>
+    </div>
+    <div class="math-op">=</div>
+    <div class="math-box result">
+      <span class="mb-lbl">Recovered<br>revenue</span>
+      <div class="mb-val">$3,600<span style="font-size:17px;font-weight:700;"> / mo</span></div>
+      <div class="mb-note">$43,200 a year</div>
+    </div>
+  </div>
+  <ul class="iconlist">
+    <li><span class="ic soft">◆</span><span>The middle number is the one worth arguing about — so we don't guess it for you. Once Sophia is live you stop estimating entirely: the weekly review reports how many calls she took and how many became appointments.</span></li>
+  </ul>
+  <div class="bold-banner tight"><span class="kicker">Worth noting</span>Even at a 10% conversion, the calls you're missing today more than pay for the service.</div>
+  <div class="srcnote">Illustrative example. Call volume and conversion rate are inputs for your practice to set — they are not published figures and we make no claim about them. $150 per encounter is the MGMA outpatient primary care benchmark. After-hours demand basis: North F, et al., JMIR Med Inform 2021;9(3):e23450.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">4 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 4 ============================ -->
 <div class="slide bg-gray">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;What happens when the AI doesn't know the answer?&rdquo;</div>
-    <h2 class="slide-title">Safety-First by Design</h2>
+    <span class="tag-chip"><span class="dot"></span>Overflow Coverage</span>
+    <h2 class="slide-title">When your receptionist can't pick up, Sophia does.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">Sophia's core programming rule: when in doubt, transfer to a human.</div>
+    <div class="lede">During office hours, your receptionist is always first. Sophia catches what's behind her.</div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">✓</span><span>She never guesses about medical matters.</span></li>
-    <li><span class="ic">✓</span><span>She never improvises clinical advice.</span></li>
-    <li><span class="ic">✓</span><span>She never assumes what your practice policy is.</span></li>
-    <li><span class="ic">✓</span><span>Any question she isn't fully confident about goes to your staff.</span></li>
+    <li><span class="ic">⇄</span><span><strong>Second caller, answered instantly.</strong> While your receptionist is on line one, Sophia takes line two.</span></li>
+    <li><span class="ic">✓</span><span><strong>Nobody sits on hold.</strong> No hold music, no phone tree, no callback request that never gets returned.</span></li>
+    <li><span class="ic">★</span><span><strong>Your receptionist stays the voice of the practice</strong> — and stops apologizing for the phone ringing during a check-in.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">The principle</span>An AI that says &ldquo;let me get someone for you&rdquo; is safer than one that tries to be impressive.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">4 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Staff relief, not staff replacement</span>Your team gets to focus on the patient standing in front of them.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">5 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 5 ============================ -->
 <div class="slide bg-white">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;Patients will feel tricked.&rdquo;</div>
-    <h2 class="slide-title">Radical Transparency</h2>
+    <span class="tag-chip"><span class="dot"></span>A Fuller Schedule</span>
+    <h2 class="slide-title">More answered calls. More booked appointments.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">Sophia always identifies herself as an AI. Every call. No exceptions.</div>
   </div>
-  <div class="pullquote">&ldquo;Hi, I'm Sophia, an AI assistant with Dr.&nbsp;Smith's office.&rdquo;</div>
   <ul class="iconlist">
-    <li><span class="ic soft">◆</span><span>No fake names. No pretending to be human.</span></li>
-    <li><span class="ic soft">◆</span><span>Introduced as part of your team — not a random robot answering service.</span></li>
-    <li><span class="ic soft">◆</span><span>Patients consistently forgive an AI that's honest. They don't forgive one that deceives.</span></li>
+    <li><span class="ic">▤</span><span><strong>She books, not just messages.</strong> Sophia checks real availability and schedules the appointment on the call — no callback loop.</span></li>
+    <li><span class="ic">↻</span><span><strong>She follows up outbound.</strong> Patients due for an annual physical get a call offering to book it — only <strong>8%</strong> of adults 35+ receive all the preventive care recommended for them, and nobody has time to chase the rest by hand.</span></li>
+    <li><span class="ic">↺</span><span><strong>She fills the gaps.</strong> Cancellations and reschedules get handled the moment the patient calls — and the caller who would have hung up and dialed the next practice on the list stays yours.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Why it works</span>Honesty up front removes the moment where a patient feels fooled.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">5 / 16</span></div>
+  <div class="bold-banner tight"><span class="kicker">The compounding effect</span>A fuller schedule from the demand you already have — no new marketing spend.</div>
+  <div class="srcnote">Preventive care: Borsky A, et al., &ldquo;Few Americans Receive All High-Priority, Appropriate Clinical Preventive Services,&rdquo; Health Affairs, 2018 — 8% of adults aged 35+ received all high-priority services recommended for them.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">6 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 6 ============================ -->
 <div class="slide bg-blue">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;What if a patient just wants a real person?&rdquo;</div>
-    <h2 class="slide-title">The Escape Hatch — On Every Single Call</h2>
+    <span class="tag-chip"><span class="dot"></span>Cleaner Revenue</span>
+    <h2 class="slide-title">Insurance verified before they walk in.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">Within the first seconds of every call, Sophia offers the exit:</div>
+    <div class="lede">Sophia runs real eligibility at the moment of scheduling — not the morning of the visit.</div>
   </div>
-  <div class="pullquote">&ldquo;If you'd prefer to speak with our receptionist, I can transfer you right now.&rdquo;</div>
+  <div class="stat-row">
+    <div class="stat-tile">
+      <div class="sv">26.6%</div>
+      <div class="sl">of claim denials trace back to registration and eligibility — the single largest category.</div>
+      <div class="ss">Change Healthcare Revenue Cycle Denials Index</div>
+    </div>
+    <div class="stat-tile">
+      <div class="sv">$12.3B</div>
+      <div class="sl">a year the industry still leaves on the table doing eligibility checks the manual way.</div>
+      <div class="ss">CAQH Index, annual savings opportunity</div>
+    </div>
+  </div>
   <ul class="iconlist">
-    <li><span class="ic">→</span><span>The patient never has to ask twice.</span></li>
-    <li><span class="ic">→</span><span>The patient never has to fight a phone tree.</span></li>
-    <li><span class="ic">→</span><span>No patient is ever trapped with an AI.</span></li>
+    <li><span class="ic">◈</span><span>Coverage, copay, and deductible confirmed while the patient is still on the phone — not on the morning of the visit.</span></li>
+    <li><span class="ic">✓</span><span>Eligibility problems surface days early, when there's still time to fix them.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">The paradox</span>A patient who can leave the conversation at any time rarely wants to.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">6 / 16</span></div>
+  <div class="bold-banner tight"><span class="kicker">Live today</span>Real-time eligibility through our verification partner — under a signed BAA.</div>
+  <div class="srcnote">Sources: Change Healthcare Revenue Cycle Denials Index — registration/eligibility accounts for 26.6% of denials. CAQH Index — full adoption of electronic eligibility and benefit verification represents ~$12.3B in annual savings across medical and dental.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">7 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 7 ============================ -->
 <div class="slide bg-gray">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;The AI won't know when something is going wrong.&rdquo;</div>
-    <h2 class="slide-title">Smart Escalation Triggers</h2>
+    <span class="tag-chip"><span class="dot"></span>Patients Appreciate It</span>
+    <h2 class="slide-title">She introduces herself — every time.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">Sophia listens for the moments that need a human and transfers immediately:</div>
+    <div class="lede">Sophia says who she is at the top of every call. Patients respond well to being told.</div>
   </div>
-  <ul class="iconlist" style="column-count:1;">
-    <li><span class="ic">!</span><span>Patient frustration or confusion</span></li>
-    <li><span class="ic">!</span><span>Hesitation or uncertainty in the patient's voice</span></li>
-    <li><span class="ic">!</span><span>Medical urgency or crisis language</span></li>
-    <li><span class="ic">!</span><span>&ldquo;Let me speak to a real person&rdquo;</span></li>
-    <li><span class="ic">!</span><span>Any request outside what she's confident handling</span></li>
+  <div class="pullquote">&ldquo;Hi, I'm Sophia, the AI assistant with Dr.&nbsp;Smith's office. How can I help you today?&rdquo;</div>
+  <ul class="iconlist">
+    <li><span class="ic soft">◆</span><span>Introduced as part of <em>your</em> team — not an outside answering service.</span></li>
+    <li><span class="ic soft">◆</span><span>No fake name, no pretending to be human, nothing for a patient to feel misled about later.</span></li>
+    <li><span class="ic soft">◆</span><span>Honesty up front is also what state AI-disclosure laws are moving toward. You're already on the right side of it.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Built-in safeguard</span>Crisis detection is built in — urgent symptoms are identified, staff are connected, and patients are directed to 911 when appropriate.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">7 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Why it lands</span>Patients forgive an assistant that's honest. Transparency is the feature, not the disclaimer.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">8 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 8 ============================ -->
 <div class="slide bg-white">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;You'll flip a switch and walk away.&rdquo;</div>
-    <h2 class="slide-title">Shadow Mode — She Listens Before She Speaks</h2>
+    <span class="tag-chip"><span class="dot"></span>Always a Human Available</span>
+    <h2 class="slide-title">A real person is always one sentence away.</h2>
     <div class="accent-bar"></div>
-    <span class="timeline-chip">Weeks 1–2 &nbsp;·&nbsp; Sophia takes zero live calls</span>
+    <div class="lede">Any patient who wants your staff gets your staff — they only have to say so once.</div>
   </div>
+  <div class="pullquote">&ldquo;If you'd rather speak with our receptionist, I can connect you right now.&rdquo;</div>
   <ul class="iconlist">
-    <li><span class="ic soft">👂</span><span>She listens and learns your scripts, your policies, your patterns.</span></li>
-    <li><span class="ic soft">🔍</span><span>Our team reviews every interaction before it ever reaches a patient.</span></li>
-    <li><span class="ic soft">🟢</span><span>She goes live only when <strong>you</strong> say go — not on a vendor's timeline.</span></li>
+    <li><span class="ic">→</span><span>Offered on the call, not buried in a menu.</span></li>
+    <li><span class="ic">→</span><span>During office hours the call goes to your front desk. After hours, Sophia takes a message and flags it first thing.</span></li>
+    <li><span class="ic">→</span><span>No patient is ever stuck talking to software.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Our onboarding standard</span>White-glove onboarding, not a self-serve switch. We earn trust before we ask for it.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">8 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">The paradox</span>A patient who can leave the conversation at any moment almost never wants to.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">9 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 9 ============================ -->
 <div class="slide bg-blue">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;My front desk staff will be replaced — or undermined.&rdquo;</div>
-    <h2 class="slide-title">Hybrid Mode — Sophia and Your Receptionist, Together</h2>
+    <span class="tag-chip"><span class="dot"></span>She Knows Her Limits</span>
+    <h2 class="slide-title">When it needs a human, she hands it over.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">Calls are shared between Sophia and your human receptionist.</div>
+    <div class="lede">Sophia's core rule: when in doubt, get a person. She never guesses about medical matters.</div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">⇄</span><span><strong>Peak hours:</strong> Sophia takes the overflow instead of sending patients to hold.</span></li>
-    <li><span class="ic">★</span><span>Your receptionist stays the primary voice of the practice.</span></li>
-    <li><span class="ic">✓</span><span>Nobody waits on hold. Nobody hits voicemail.</span></li>
+    <li><span class="ic">!</span><span><strong>Urgent or crisis language</strong> — patients are directed to 911 or the 988 crisis line, with scripting built by physicians.</span></li>
+    <li><span class="ic">!</span><span><strong>Clinical questions</strong> — she takes the message for your team instead of improvising an answer.</span></li>
+    <li><span class="ic">!</span><span><strong>Anything outside her scope</strong> — practice policy, billing disputes, anything unusual goes to a human.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">The outcome</span>Staff relief, not staff replacement. Your team handles the patients in front of them.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">9 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">The design principle</span>An assistant who says &ldquo;let me get someone for you&rdquo; is worth far more than one that tries to be impressive.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">10 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 10 ============================ -->
 <div class="slide bg-gray">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;Once the AI has the call, I've lost control of it.&rdquo;</div>
-    <h2 class="slide-title">Live Barge-In — Your Staff Can Take Over Instantly</h2>
+    <span class="tag-chip"><span class="dot"></span>She Gets Better Every Week</span>
+    <h2 class="slide-title">Weekly call review — done by us, for you.</h2>
     <div class="accent-bar"></div>
+    <div class="lede">Every call Sophia handles for your practice is reviewed every week. You get the findings; we do the work.</div>
   </div>
-  <ul class="iconlist">
-    <li><span class="ic">🎧</span><span>Your receptionist can listen to any Sophia call in real time.</span></li>
-    <li><span class="ic">1</span><span><strong>One click</strong> takes over the call.</span></li>
-    <li><span class="ic">↩</span><span>Sophia never competes for control — she hands off and steps back.</span></li>
-  </ul>
-  <div class="bold-banner"><span class="kicker">Chain of command</span>The human is always in charge. Sophia is the one who defers.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">10 / 16</span></div>
+  <div class="loop-row">
+    <div class="loop-step">
+      <span class="ls-num">1</span>
+      <h4>Every call transcribed</h4>
+      <p>Each call Sophia takes for your practice is captured and transcribed.</p>
+    </div>
+    <div class="loop-arrow">›</div>
+    <div class="loop-step">
+      <span class="ls-num">2</span>
+      <h4>Our team reviews weekly</h4>
+      <p>We look for anything she handled awkwardly, missed, or should have escalated.</p>
+    </div>
+    <div class="loop-arrow">›</div>
+    <div class="loop-step">
+      <span class="ls-num">3</span>
+      <h4>You get a summary</h4>
+      <p>What she handled, what we found, and what we recommend changing.</p>
+    </div>
+    <div class="loop-arrow">›</div>
+    <div class="loop-step">
+      <span class="ls-num">4</span>
+      <h4>We implement the fix</h4>
+      <p>Approved changes go into her scripting. No work lands on your staff.</p>
+    </div>
+  </div>
+  <div class="bold-banner" style="padding:18px 30px;font-size:20px;"><span class="kicker">The difference</span>Sophia is the only member of your front desk who gets a performance review every single week.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">11 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 11 ============================ -->
 <div class="slide bg-white">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;I'll have no idea what the AI is telling my patients.&rdquo;</div>
-    <h2 class="slide-title">Every Call Recorded, Transcribed, Searchable</h2>
+    <span class="tag-chip"><span class="dot"></span>Full Visibility</span>
+    <h2 class="slide-title">You see exactly what she said.</h2>
     <div class="accent-bar"></div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">●</span><span>Every Sophia call is recorded and transcribed.</span></li>
-    <li><span class="ic">⌕</span><span>Full review dashboard — search any call, any patient, any day.</span></li>
-    <li><span class="ic">◎</span><span>Nothing about how Sophia talks to your patients is hidden from you.</span></li>
+    <li><span class="ic">●</span><span>Every Sophia call is recorded and transcribed — nothing about how she speaks to your patients is hidden from you.</span></li>
+    <li><span class="ic">⌕</span><span>Search any call, any day, any patient, from your practice dashboard.</span></li>
+    <li><span class="ic">◎</span><span>Your staff can spot-check her the same way you'd spot-check a new hire's first month.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Full visibility</span>If something goes wrong, you'll see it before a patient tells you about it — and we'll fix it.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">11 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Accountability</span>If something needs correcting, you'll see it in the transcript before a patient ever mentions it — and we'll fix it that week.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">12 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 12 ============================ -->
 <div class="slide bg-blue">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;How will I know patients actually liked it?&rdquo;</div>
-    <h2 class="slide-title">Proof from the Patients Themselves</h2>
+    <span class="tag-chip"><span class="dot"></span>Built for Healthcare</span>
+    <h2 class="slide-title">HIPAA-ready from the foundation up.</h2>
     <div class="accent-bar"></div>
-    <div class="lede">After every Sophia-handled call, an automated SMS asks: &ldquo;How was your experience?&rdquo;</div>
+    <div class="lede">Sophia was built by physicians who knew what the compliance bar had to be.</div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">★</span><span>Ratings tracked, reported, and reviewed with you.</span></li>
-    <li><span class="ic">📊</span><span>You get patient sentiment data — not vendor promises.</span></li>
-    <li><span class="ic">↓</span><span>If satisfaction drops, you'll know immediately and can dial coverage back.</span></li>
+    <li><span class="ic">✚</span><span><strong>Signed BAAs</strong> with every vendor in the stack that can touch patient information.</span></li>
+    <li><span class="ic">◈</span><span><strong>Minimal data by design</strong> — patient details live in your EMR, not in a marketing database.</span></li>
+    <li><span class="ic">⌸</span><span><strong>A full audit trail</strong> — calls and system access are logged and retained, so there's a record if you ever need one.</span></li>
+    <li><span class="ic">✓</span><span><strong>A documented go-live checklist</strong> your practice signs off on before Sophia takes a single live patient call.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Accountability</span>You shouldn't have to take our word for it. You won't have to.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">12 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Your BAA</span>You get a BAA with us. In writing, before go-live — not after the first incident.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">13 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 13 ============================ -->
 <div class="slide bg-gray">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;I have no idea what this actually sounds like.&rdquo;</div>
-    <h2 class="slide-title">Hear Her Before You Decide</h2>
+    <span class="tag-chip"><span class="dot"></span>Hear Her Yourself</span>
+    <h2 class="slide-title">Call her right now. No demo scheduled.</h2>
     <div class="accent-bar"></div>
   </div>
   <div style="margin-bottom:26px;">
     <span class="phone-cta"><span class="pic">✆</span>(954) 419-5004</span>
   </div>
   <ul class="iconlist">
-    <li><span class="ic">✆</span><span>Call Sophia yourself right now: <strong>(954) 419-5004</strong>. No demo scheduled, no salesperson.</span></li>
-    <li><span class="ic">⇄</span><span>Side-by-side comparison: a live Sophia call vs. what a missed call sounds like today.</span></li>
-    <li><span class="ic">▶</span><span>Review real call recordings from practices already running her.</span></li>
+    <li><span class="ic">✆</span><span>Pick up your phone and call <strong>(954) 419-5004</strong>. No form, no salesperson, no waiting for a slot on a calendar.</span></li>
+    <li><span class="ic">◷</span><span>Try her the way a patient would — book something, change your mind, ask her a question she shouldn't answer.</span></li>
+    <li><span class="ic">✓</span><span>Then decide. Judge the voice your patients would hear, before a single patient hears it.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Try before trust</span>Judge the voice your patients will hear — before a single patient hears it.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">13 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Try before trust</span>We'd rather you test her yourself than take our word for any of this.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">14 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 14 ============================ -->
 <div class="slide bg-white">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote" style="margin-bottom:10px;">&ldquo;Is this even worth the risk?&rdquo;</div>
-    <h2 class="slide-title" style="font-size:38px;">What Sophia Handles Once You're Comfortable</h2>
+    <span class="tag-chip"><span class="dot"></span>What's Included</span>
+    <h2 class="slide-title" style="font-size:38px;">What Sophia Handles for Your Practice</h2>
     <div class="accent-bar" style="margin:14px 0 20px 0;"></div>
   </div>
   <div class="feat-grid">
-    <div class="feat"><div class="fic">☾</div><h4>24/7 coverage</h4><p>Every call answered — no hold, no voicemail.</p></div>
-    <div class="feat"><div class="fic">📅</div><h4>Books directly into your EMR</h4><p>Athena, Tebra, eClinicalWorks, Elation, DrChrono.</p></div>
-    <div class="feat"><div class="fic">🛡</div><h4>Real-time insurance verification</h4><p>Eligibility, copays, coverage at the moment of scheduling.</p></div>
-    <div class="feat"><div class="fic">↻</div><h4>Outbound follow-up</h4><p>Pursues inquiries until they book (~60% booking rate).</p></div>
-    <div class="feat"><div class="fic">✓</div><h4>Cleaner claims</h4><p>Verified eligibility up front means fewer front-end denials.</p></div>
-    <div class="feat"><div class="fic">⚕</div><h4>HIPAA compliant, BAA included</h4><p>Backed by ElevenLabs Grants.</p></div>
+    <div class="feat"><div class="fic">☾</div><h4>24/7 coverage</h4><p>Every call answered — no hold, no voicemail, no missed opportunity.</p></div>
+    <div class="feat"><div class="fic">⇄</div><h4>Daytime overflow</h4><p>Picks up when your receptionist is already on another line.</p></div>
+    <div class="feat"><div class="fic">▤</div><h4>Scheduling in your EMR</h4><p>Connected to your system during onboarding — Athena, Tebra, eClinicalWorks, Elation, DrChrono.</p></div>
+    <div class="feat"><div class="fic">◈</div><h4>Insurance verification</h4><p>Eligibility, copay, and coverage confirmed at the moment of scheduling.</p></div>
+    <div class="feat"><div class="fic">↻</div><h4>Outbound follow-up</h4><p>Calls patients due for an annual physical and books them.</p></div>
+    <div class="feat"><div class="fic">⌕</div><h4>Weekly review &amp; tuning</h4><p>We review her calls every week and implement the improvements.</p></div>
   </div>
-  <div class="bold-banner" style="padding:16px 30px;font-size:19.5px;"><span class="kicker">No disruption</span>Works with your existing system. No rip-and-replace, no workflow disruption.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">14 / 16</span></div>
+  <div class="bold-banner" style="padding:16px 30px;font-size:19.5px;"><span class="kicker">No disruption</span>Works alongside your existing phones and EMR. No rip-and-replace, no retraining your staff.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">15 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 15 ============================ -->
 <div class="slide bg-blue">
   <div class="edge-bar"></div>
   <div>
-    <span class="fear-chip"><span class="dot"></span>The Fear</span>
-    <div class="fear-quote">&ldquo;I'll be locked into something I can't back out of.&rdquo;</div>
-    <h2 class="slide-title">You Control the Pace</h2>
+    <span class="tag-chip"><span class="dot"></span>You Set the Pace</span>
+    <h2 class="slide-title">Start with the calls you're already missing.</h2>
     <div class="accent-bar"></div>
   </div>
   <div class="phase-row">
     <div class="phase-card">
       <span class="ph-num">Phase 1</span>
       <h3>After hours</h3>
-      <p>Nights and weekends only. The calls you're already missing.</p>
+      <p>Nights and weekends. Pure upside — these calls go to voicemail today.</p>
     </div>
     <div class="phase-card p2">
       <span class="ph-num">Phase 2</span>
-      <h3>Overflow</h3>
-      <p>Peak hours, when your team is already on another line.</p>
+      <h3>Daytime overflow</h3>
+      <p>Peak hours and lunch, when your team is already on another line.</p>
     </div>
     <div class="phase-card p3">
       <span class="ph-num">Phase 3</span>
       <h3>Full coverage</h3>
-      <p>Only when you're ready. Only <em>if</em> you're ready.</p>
+      <p>Whenever the weekly reviews have earned it. Entirely your call.</p>
     </div>
   </div>
   <ul class="iconlist">
-    <li><span class="ic soft">◆</span><span>No timeline. No pressure. No phase you're required to reach.</span></li>
-    <li><span class="ic soft">↩</span><span>You can move backward at any point.</span></li>
+    <li><span class="ic soft">◆</span><span>Every phase is optional. There's no stage you're required to reach.</span></li>
+    <li><span class="ic soft">↩</span><span>You can dial coverage back at any point, for any reason.</span></li>
   </ul>
-  <div class="bold-banner"><span class="kicker">Your schedule</span>Every practice moves at its own speed. Yours sets the schedule.</div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">15 / 16</span></div>
+  <div class="bold-banner"><span class="kicker">Phase 1 is free money</span>You're not risking anything to start — those calls aren't being answered today.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">16 / 18</span></div>
 </div>
 
 <!-- ============================ SLIDE 16 : CLOSE ============================ -->
@@ -798,18 +1009,17 @@
   <div class="corner-circle" style="width:5in;height:5in;right:-1.9in;top:-1.9in;background:radial-gradient(circle at 40% 60%, rgba(96,165,250,0.28), rgba(96,165,250,0.02) 70%);"></div>
   <div class="corner-circle" style="width:3in;height:3in;left:-1.2in;bottom:-1.2in;background:radial-gradient(circle at 60% 40%, rgba(37,99,235,0.35), rgba(37,99,235,0) 72%);"></div>
   <div style="position:relative;z-index:2;">
-    <span class="fear-chip" style="background:#2563eb;"><span class="dot" style="background:#ffffff;"></span>The Fear</span>
-    <div class="fear-quote" style="color:#94a3b8;">&ldquo;What if it doesn't work for my practice?&rdquo;</div>
-    <h2 class="slide-title" style="color:#ffffff;">Risk-Free. The Relationship Is <span style="color:#60a5fa;">Earned Monthly.</span></h2>
+    <span class="tag-chip" style="background:#2563eb;"><span class="dot" style="background:#ffffff;"></span>Getting Started</span>
+    <h2 class="slide-title" style="color:#ffffff;">Try Her Free. Keep Her <span style="color:#60a5fa;">Only If She Earns It.</span></h2>
     <div class="accent-bar"></div>
   </div>
   <ul class="iconlist" style="position:relative;z-index:2;">
-    <li><span class="ic">30</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">30-day free beta trial</strong> — cancel anytime</span></li>
-    <li><span class="ic">∞</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Month-to-month</strong> after that — no long-term contracts</span></li>
-    <li><span class="ic">48</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Setup in ~48 hours</strong>, with no disruption to your workflow</span></li>
-    <li><span class="ic">✓</span><span style="color:#e2e8f0;">If it isn't working, walk away. <strong style="color:#ffffff;">The relationship is earned monthly.</strong></span></li>
+    <li><span class="ic">30</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">30-day free trial</strong> — see the booked appointments before you pay for any of them</span></li>
+    <li><span class="ic">∞</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Month-to-month</strong> after that — no long-term contract</span></li>
+    <li><span class="ic">48</span><span style="color:#e2e8f0;"><strong style="color:#ffffff;">Live in about 48 hours</strong>, with no disruption to your phones or your staff</span></li>
+    <li><span class="ic">✓</span><span style="color:#e2e8f0;">Cancel any month. <strong style="color:#ffffff;">The relationship is earned monthly.</strong></span></li>
   </ul>
-  <div style="position:relative;z-index:2;border-left:7px solid #60a5fa;background:rgba(37,99,235,0.18);border-radius:0 14px 14px 0;padding:16px 24px;font-size:20px;font-style:italic;font-weight:600;color:#bfdbfe;max-width:8.8in;margin:6px 0 22px 0;">&ldquo;The front desk that never calls in sick, never puts a patient on hold, and never misses a call.&rdquo;</div>
+  <div style="position:relative;z-index:2;border-left:7px solid #60a5fa;background:rgba(37,99,235,0.18);border-radius:0 14px 14px 0;padding:16px 24px;font-size:20px;font-style:italic;font-weight:600;color:#bfdbfe;max-width:8.8in;margin:6px 0 22px 0;">&ldquo;The front desk that never calls in sick, never puts a patient on hold, and never lets a new patient go to voicemail.&rdquo;</div>
   <div style="position:relative;z-index:2;margin-top:auto;margin-bottom:0.5in;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;">
     <div>
       <div style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#60a5fa;margin-bottom:8px;">Try it yourself — call Sophia</div>
@@ -820,7 +1030,27 @@
       jeremiah@oursophia.com &nbsp;·&nbsp; <span style="color:#60a5fa;font-weight:700;">trysoph.com</span>
     </div>
   </div>
-  <div class="footer"><span class="brand">Sophia AI · Trust &amp; Safety</span><span class="pagenum">16 / 16</span></div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">17 / 18</span></div>
+</div>
+
+<!-- ============================ SLIDE 18 : SOURCES ============================ -->
+<div class="slide bg-gray">
+  <div class="edge-bar"></div>
+  <div>
+    <span class="tag-chip"><span class="dot"></span>Sources</span>
+    <h2 class="slide-title" style="font-size:38px;">Where These Numbers Come From</h2>
+    <div class="accent-bar" style="margin:14px 0 22px 0;"></div>
+  </div>
+  <ul class="src-list">
+    <li><strong>65% prefer booking by phone</strong><span>Phreesia, &ldquo;Appointments and Referrals: Understanding Patients' Preferences.&rdquo; Survey of approximately 14,000 patients: 65% preferred scheduling by phone, 18% online, 15% in person.</span></li>
+    <li><strong>29.5% of scheduling actions occur outside business hours</strong><span>North F, Buss R, Nelson EM, et al. &ldquo;Impact of Web-Based Self-Scheduling on Finalization of Well-Child Appointments in a Primary Care Setting.&rdquo; JMIR Medical Informatics 2021;9(3):e23450. Mayo Clinic; 354 of 1,201 self-scheduling actions occurred outside regular business hours.</span></li>
+    <li><strong>$150 average revenue per primary care encounter</strong><span>MGMA benchmark for average revenue per outpatient encounter, primary care practices. Specialty practices average $233.</span></li>
+    <li><strong>8% of adults receive all recommended preventive care</strong><span>Borsky A, Zhan C, Miller T, et al. &ldquo;Few Americans Receive All High-Priority, Appropriate Clinical Preventive Services.&rdquo; Health Affairs 2018;37(6). Adults aged 35 and older.</span></li>
+    <li><strong>26.6% of denials trace to registration and eligibility</strong><span>Change Healthcare Revenue Cycle Denials Index. Registration/eligibility is the largest single denial category, ahead of authorization/precertification (11.6%) and service not covered (10.6%).</span></li>
+    <li><strong>$12.3B annual eligibility-verification savings opportunity</strong><span>CAQH Index. Estimated annual savings available to the medical and dental industries from fully electronic eligibility and benefit verification.</span></li>
+  </ul>
+  <div class="srcnote" style="margin-top:auto;margin-bottom:0.42in;font-size:11.5px;">The call-volume and conversion figures on the &ldquo;Run Your Own Numbers&rdquo; slide are illustrative inputs for your practice to set — they are not published statistics, and Sophia AI makes no claim about them. Once Sophia is live at your practice, those figures are replaced by your actual measured numbers in the weekly review.</div>
+  <div class="footer"><span class="brand">Sophia AI · Always Answered</span><span class="pagenum">18 / 18</span></div>
 </div>
 
 <script>
@@ -866,7 +1096,7 @@
     const slideW = 11 * 96; // 11 inches in px at 96dpi
     const slideH = 8.5 * 96;
     const scale = Math.min((vw * 0.94) / slideW, (vh * 0.90) / slideH, 1);
-    slides.forEach(s => { s.style.transform = 'scale(' + scale + ')'; });
+    slides.forEach(s => { s.style.transform = 'translate(-50%, -50%) scale(' + scale + ')'; });
   }
 
   function go(n) {
