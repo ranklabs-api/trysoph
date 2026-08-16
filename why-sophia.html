@@ -175,6 +175,7 @@
     }
   }
 
+
   /* ============ BACKGROUNDS ============ */
   .bg-white  { background: #ffffff; }
   .bg-blue   { background: #eff6ff; }
@@ -615,6 +616,106 @@
     justify-content: center;
     font-size: 20px;
   }
+
+  /* ============ SMALL SCREENS: scrolling card stack, not a slideshow ============
+     A landscape 11x8.5in slide cannot be read on a portrait phone. Below 900px
+     every slide becomes a full-width card in a normal scrolling document, the
+     slideshow chrome is hidden, and the JS skips scaling entirely. */
+  @media screen and (max-width: 900px) {
+    html, body {
+      height: auto;
+      overflow: visible;
+      display: block;
+      background: #0f172a;
+    }
+    .slide {
+      display: flex !important;
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0;
+      overflow: visible;
+      padding: 34px 22px 28px 26px;
+      margin: 0 0 12px 0;
+      box-shadow: none;
+    }
+    .ss-arrow, .ss-dots, .ss-counter { display: none !important; }
+
+    .edge-bar { width: 8px; }
+    .corner-circle { display: none; }
+
+    /* Typography */
+    .slide-title { font-size: 27px !important; }
+    .hero-title { font-size: 42px; }
+    .hero-sub { font-size: 18px; margin-top: 16px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.1em; margin-bottom: 20px; padding: 7px 14px; }
+    .hero-rule { margin-top: 22px; }
+    .lede { font-size: 17px; margin-bottom: 18px; }
+    .tag-chip { font-size: 11px; letter-spacing: 0.09em; padding: 6px 13px; }
+    .accent-bar { width: 64px; height: 6px; margin: 14px 0 18px 0; }
+    .pullquote { font-size: 18px; padding: 16px 18px; margin-bottom: 18px; }
+    ul.iconlist li { font-size: 16px; gap: 12px; margin-bottom: 13px; }
+    ul.iconlist .ic { flex: 0 0 28px; width: 28px; height: 28px; font-size: 14px; border-radius: 8px; }
+    .bold-banner {
+      font-size: 16.5px;
+      padding: 16px 18px;
+      margin-top: 18px;
+      margin-bottom: 0;
+      border-radius: 12px;
+    }
+    .bold-banner.tight { margin-bottom: 0; }
+    .srcnote { font-size: 10.5px; margin-bottom: 0; }
+
+    /* Multi-column components stack */
+    .stat-row, .math-row, .phase-row, .loop-row, .two-col { flex-direction: column; gap: 12px; }
+    .feat-grid { grid-template-columns: 1fr; gap: 12px; }
+    .hours-strip { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .src-list { column-count: 1; }
+    .src-list li { font-size: 13px; margin-bottom: 14px; }
+
+    .stat-tile { padding: 16px 18px; }
+    .stat-tile .sv { font-size: 36px; margin-bottom: 8px; }
+    .stat-tile .sl { font-size: 14.5px; }
+    .math-op { align-self: center; font-size: 20px; }
+    .math-box .mb-val { font-size: 28px; }
+    .math-box.result .mb-val { font-size: 26px; }
+    .phase-card h3 { font-size: 20px; }
+    .phase-card p { font-size: 15px; }
+    .loop-arrow { display: none; }
+    .hour-card h4 { font-size: 15.5px; }
+    .hour-card p { font-size: 12.5px; }
+    .feat p { font-size: 13.5px; }
+
+    /* Footers rejoin the flow */
+    .footer {
+      position: static;
+      left: auto; right: auto; bottom: auto;
+      margin-top: 20px;
+      font-size: 10px;
+    }
+    .hero-footer {
+      position: static;
+      left: auto; right: auto; bottom: auto;
+      margin-top: 26px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .phone-cta { font-size: 20px; padding: 12px 22px; }
+    .phone-cta .pic { width: 34px; height: 34px; font-size: 17px; }
+
+    .close-row {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 22px !important;
+      margin-bottom: 0 !important;
+    }
+    .close-row > div:last-child { text-align: left !important; font-size: 14px !important; }
+  }
 </style>
 </head>
 <body>
@@ -1020,7 +1121,7 @@
     <li><span class="ic">✓</span><span style="color:#e2e8f0;">Cancel any month. <strong style="color:#ffffff;">The relationship is earned monthly.</strong></span></li>
   </ul>
   <div style="position:relative;z-index:2;border-left:7px solid #60a5fa;background:rgba(37,99,235,0.18);border-radius:0 14px 14px 0;padding:16px 24px;font-size:20px;font-style:italic;font-weight:600;color:#bfdbfe;max-width:8.8in;margin:6px 0 22px 0;">&ldquo;The front desk that never calls in sick, never puts a patient on hold, and never lets a new patient go to voicemail.&rdquo;</div>
-  <div style="position:relative;z-index:2;margin-top:auto;margin-bottom:0.5in;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;">
+  <div class="close-row" style="position:relative;z-index:2;margin-top:auto;margin-bottom:0.5in;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;">
     <div>
       <div style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#60a5fa;margin-bottom:8px;">Try it yourself — call Sophia</div>
       <span class="phone-cta" style="background:#2563eb;border-color:#60a5fa;color:#ffffff;"><span class="pic" style="background:#ffffff;color:#2563eb;">✆</span>(954) 419-5004</span>
@@ -1059,6 +1160,14 @@
   const N = slides.length;
   let idx = 0;
 
+  // Small screens render every slide as a card in a scrolling document. No
+  // scaling, no arrows, and crucially no swipe handler competing with scroll.
+  const stacked = window.matchMedia('(max-width: 900px)');
+  if (stacked.matches) {
+    stacked.addEventListener('change', e => { if (!e.matches) location.reload(); });
+    return;
+  }
+
   // Create nav UI
   const prevBtn = document.createElement('button');
   prevBtn.className = 'ss-arrow ss-prev';
@@ -1091,8 +1200,10 @@
 
   // Scale slides to fit viewport
   function rescale() {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+    // documentElement.clientWidth is the layout viewport; innerWidth can report
+    // a stale/larger value mid-load and would leave slides scaled at 1.
+    const vw = document.documentElement.clientWidth || window.innerWidth;
+    const vh = document.documentElement.clientHeight || window.innerHeight;
     const slideW = 11 * 96; // 11 inches in px at 96dpi
     const slideH = 8.5 * 96;
     const scale = Math.min((vw * 0.94) / slideW, (vh * 0.90) / slideH, 1);
@@ -1138,6 +1249,10 @@
   go(0);
   rescale();
   window.addEventListener('resize', rescale);
+  window.addEventListener('orientationchange', rescale);
+  window.addEventListener('load', rescale);
+  // Re-measure after layout settles, in case the first pass ran too early.
+  setTimeout(rescale, 250);
 })();
 </script>
 </body>
