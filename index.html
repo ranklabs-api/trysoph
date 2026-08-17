@@ -442,6 +442,19 @@
   .calendly-close:hover { background: rgba(0,0,0,0.2); }
   .calendly-modal iframe { width: 100%; height: 100%; border: none; }
 
+  /* PHONE DEMO MODAL */
+  .phone-demo-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 1.25rem; backdrop-filter: blur(4px); }
+  .phone-demo-overlay.active { display: flex; }
+  .phone-demo-modal { background: white; border-radius: 20px; width: 100%; max-width: 460px; position: relative; padding: 3rem 2.5rem 2.5rem; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.25); }
+  .phone-demo-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.07); border: none; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; color: var(--text-dark); transition: background 0.2s; }
+  .phone-demo-close:hover { background: rgba(0,0,0,0.14); }
+  .phone-demo-modal h2 { color: var(--text-dark); font-size: 1.65rem; margin-bottom: 0.75rem; }
+  .phone-demo-modal p { color: var(--text-muted); line-height: 1.6; }
+  .phone-demo-number { display: block; margin: 1.5rem 0; color: var(--blue-dark); font-size: clamp(1.8rem, 7vw, 2.35rem); font-weight: 800; letter-spacing: -0.03em; }
+  .phone-demo-confirm { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: white; border: none; border-radius: 10px; padding: 0.85rem 2rem; font: inherit; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .phone-demo-confirm:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(37,99,235,0.25); }
+  .phone-demo-note { margin-top: 1.25rem; font-size: 0.8rem; }
+
   @media (max-width: 900px) {
     .pricing-scroll-wrap, .wyg-grid, .metrics-grid { grid-template-columns: 1fr; }
     .pricing-summary { position: static; }
@@ -675,6 +688,18 @@
   <div class="calendly-modal">
     <button class="calendly-close" onclick="closeCalendlyFull()">✕</button>
     <iframe src="https://calendly.com/oursophia" title="Book a Demo with Sophia AI"></iframe>
+  </div>
+</div>
+
+<!-- PHONE DEMO MODAL -->
+<div class="phone-demo-overlay" id="phoneDemoOverlay" onclick="closePhoneDemo(event)">
+  <div class="phone-demo-modal" role="dialog" aria-modal="true" aria-labelledby="phoneDemoTitle" aria-describedby="phoneDemoDescription">
+    <button class="phone-demo-close" type="button" onclick="closePhoneDemoFull()" aria-label="Close">✕</button>
+    <h2 id="phoneDemoTitle">Call Sophia from your phone</h2>
+    <p id="phoneDemoDescription">The demo line works best from a phone. Call the number below and say hello to Sophia. No signup needed.</p>
+    <span class="phone-demo-number">(954) 419-5004</span>
+    <button class="phone-demo-confirm" type="button" onclick="closePhoneDemoFull()">Got it</button>
+    <p class="phone-demo-note">No account needed · HIPAA compliant</p>
   </div>
 </div>
 
@@ -1633,8 +1658,35 @@ let isMuted = false;
 let callActive = false;
 
 function toggleCall() {
-  window.location.href = 'tel:+19544195004';
+  const mobileUserAgent = /Android|iPhone|iPad|iPod|Mobile|webOS/i.test(navigator.userAgent);
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+
+  if (mobileUserAgent || coarsePointer) {
+    window.location.href = 'tel:+19544195004';
+    return;
+  }
+
+  const overlay = document.getElementById('phoneDemoOverlay');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  overlay.querySelector('.phone-demo-close').focus();
 }
+function closePhoneDemoFull() {
+  const overlay = document.getElementById('phoneDemoOverlay');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+  document.getElementById('micBtn').focus();
+}
+function closePhoneDemo(event) {
+  if (event.target === document.getElementById('phoneDemoOverlay')) {
+    closePhoneDemoFull();
+  }
+}
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape' && document.getElementById('phoneDemoOverlay').classList.contains('active')) {
+    closePhoneDemoFull();
+  }
+});
 function endCall() { if(retellClient) retellClient.stopCall(); resetCallUI(); }
 function toggleMute() {
   if(!retellClient) return;
