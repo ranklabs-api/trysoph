@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 404 page. Cloudflare Pages serves this with a real HTTP 404 for unknown
+     URLs. Without it, Pages falls back to index.html with HTTP 200 — a soft
+     404, which shows Google unlimited duplicate copies of the homepage. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Page Not Found — Sophia AI</title>
+<meta name="description" content="That page could not be found. Return to the homepage or read the blog.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       background:#0b1220;font-family:'Inter',system-ui,sans-serif;color:#e6edf7;padding:24px;}
+  .wrap{max-width:580px;text-align:center;}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6b8bb5;margin-bottom:14px;font-weight:700;}
+  h1{font-size:38px;font-weight:800;margin:0 0 16px;letter-spacing:-.02em;}
+  p{font-size:17px;line-height:1.6;color:#9fb3cc;margin:0 0 30px;}
+  a.btn{display:inline-block;margin:6px;padding:12px 24px;border-radius:10px;
+        background:#3b82f6;color:#fff;text-decoration:none;font-weight:600;font-size:15px;}
+  a.btn.alt{background:transparent;border:1px solid #2c4a72;color:#cfe0f5;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Error 404</div>
+    <h1>We couldn't find that page</h1>
+    <p>The page you're looking for may have moved or no longer exists.</p>
+    <a class="btn" href="/index.html">Home</a>
+    <a class="btn alt" href="/blog.html">Blog</a>
+  </div>
+</body>
+</html>
